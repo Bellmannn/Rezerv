@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0B4640">
-<title>Linyit Saha Rezerv Kütüğü</title>
+<title>Linyit Sahaları Rezerv Bilgileri</title>
 
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -12,121 +12,120 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Rezerv Kütüğü">
-
+<meta name="apple-mobile-web-app-title" content="TKİ Rezerv">
 <style>
 :root{
   --kagit:#E7EAE3; --kart:#FAFBF7; --murekkep:#15201D; --murekkep-2:#54615A;
-  --petrol:#0E5B54; --petrol-koyu:#0B4640; --oker:#C08A2E; --damar:#2C2521;
+  --petrol:#0E5B54; --petrol-koyu:#0B4640; --oker:#C08A2E; --oker-sonuk:#E6D6B4;
+  --oker-koyu:#8F6415; --damar:#2C2521;
   --cizgi:rgba(21,32,29,.13); --cizgi-kuvvetli:rgba(21,32,29,.28);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --kondens:-apple-system,BlinkMacSystemFont,"Segoe UI Semibold","Segoe UI",Roboto,Arial,sans-serif;
   --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
-  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:56px}
-.kabuk{max-width:520px;margin:0 auto}
+  font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;padding-bottom:48px}
+.kabuk{max-width:560px;margin:0 auto}
 
-.ust{background:var(--petrol-koyu);color:#EAF0EE;padding:22px 20px 18px;
+/* ---------- Başlık ---------- */
+.ust{background:var(--petrol-koyu);color:#EAF0EE;padding:22px 20px 20px;
   padding-top:calc(22px + env(safe-area-inset-top));
   background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.055) 0 1px,transparent 1px 7px)}
-.ust .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-  color:rgba(234,240,238,.62);margin:0 0 8px}
-.ust h1{font-family:var(--kondens);font-weight:700;font-size:29px;line-height:1.04;
-  letter-spacing:-.022em;margin:0}
+.ust .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;
+  color:rgba(234,240,238,.62);margin:0 0 7px}
+.ust h1{font-weight:700;font-size:25px;line-height:1.12;letter-spacing:-.024em;margin:0}
 .ust h1 em{font-style:normal;color:var(--oker)}
-.ust .altbilgi{font-family:var(--mono);font-size:11.5px;color:rgba(234,240,238,.7);margin-top:10px}
 
-.uyari{background:var(--oker);color:#2A1E06;font-family:var(--mono);font-size:11px;
-  letter-spacing:.04em;padding:8px 20px;display:none;gap:10px;align-items:center;justify-content:space-between}
-.uyari.gorunur{display:flex}
-.uyari a{color:inherit;text-decoration:underline;flex:none}
+/* ---------- Bölge + saha seçimi ---------- */
+.kumanda{padding:13px 20px 14px;border-bottom:1px solid var(--cizgi-kuvvetli)}
+.bolgeler{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.bolge{font:inherit;cursor:pointer;padding:10px 3px 8px;border-radius:3px;
+  border:1px solid rgba(143,100,21,.4);background:var(--oker-sonuk);color:#4A3A15;
+  display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1;
+  transition:background .15s,box-shadow .15s,color .15s}
+.bolge b{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.bolge span{font-family:var(--mono);font-size:9px;letter-spacing:.04em;opacity:.72}
+.bolge[aria-pressed=true]{background:var(--oker);border-color:var(--oker-koyu);color:#2A1E06;
+  box-shadow:inset 0 -3px 0 rgba(42,30,6,.34)}
+.bolge:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
 
-.filtre{position:sticky;top:0;z-index:20;background:var(--kagit);
-  border-bottom:1px solid var(--cizgi-kuvvetli);padding:12px 20px 11px}
-.filtre-satir{display:flex;gap:9px}
-.alan{flex:1;min-width:0}
+.alan{margin-top:12px}
 .alan label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--murekkep-2);margin-bottom:4px}
+  text-transform:uppercase;color:var(--murekkep-2);margin-bottom:5px}
 select,input[type=search]{width:100%;font-family:var(--sans);font-size:15px;font-weight:500;
   color:var(--murekkep);background:var(--kart);border:1px solid var(--cizgi-kuvvetli);
-  border-radius:3px;padding:9px 10px;-webkit-appearance:none;appearance:none}
+  border-radius:3px;padding:10px;-webkit-appearance:none;appearance:none}
 select{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='7'><path d='M1 1l4.5 4.5L10 1' stroke='%2354615A' stroke-width='1.6' fill='none'/></svg>");
-  background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+  background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
 select:disabled{opacity:.45}
-input[type=search]{margin-top:9px}
-:is(select,input,button,.saha,a):focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+:is(select,input,button):focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+.ara-sar{position:relative;margin-top:9px}
+#ara{padding-right:34px}
+.temizle{position:absolute;right:0;top:0;bottom:0;width:32px;border:0;background:none;
+  color:var(--murekkep-2);font-size:17px;cursor:pointer;display:none}
+.temizle.gorunur{display:block}
+.sonuclar{display:none;margin-top:9px}
+.sonuclar.gorunur{display:block}
+.sonuc-sat{display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:var(--kart);border:1px solid var(--cizgi);border-radius:3px;
+  padding:9px 11px;margin-bottom:6px}
+.sonuc-sat[aria-current=true]{border-color:var(--oker-koyu);background:var(--oker-sonuk)}
+.sonuc-sat:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+.sonuc-sat strong{display:block;font-size:14.5px;font-weight:600;letter-spacing:-.015em}
+.sonuc-sat em{display:block;font-style:normal;font-family:var(--mono);font-size:9px;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--murekkep-2);margin-top:2px}
+.sonuc-bos{font-family:var(--mono);font-size:11.5px;color:var(--murekkep-2);
+  padding:3px 2px;margin:0}
 
-.ozet{padding:16px 20px 14px;border-bottom:1px solid var(--cizgi)}
+/* ---------- Seçili saha ---------- */
+.saha-kart{margin:16px 20px 0;background:var(--kart);border:1px solid var(--cizgi-kuvvetli);
+  border-radius:3px;padding:16px 16px 14px}
+.saha-ad{font-size:24px;font-weight:700;letter-spacing:-.028em;line-height:1.1;margin:0}
+.saha-yer{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--murekkep-2);margin-top:5px}
+.saha-yer b{color:var(--oker-koyu);font-weight:600}
+
+.damar{position:relative;height:14px;margin:14px 0 4px;
+  background:repeating-linear-gradient(135deg,rgba(21,32,29,.1) 0 1px,transparent 1px 5px)}
+.damar-kaynak{position:absolute;inset:0 auto 0 0;
+  background:repeating-linear-gradient(135deg,rgba(21,32,29,.32) 0 1px,transparent 1px 4px);
+  border-right:1px solid var(--cizgi-kuvvetli);transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.damar-isl{position:absolute;inset:0 auto 0 0;background:var(--damar);
+  border-top:3px solid var(--oker);transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.damar-not{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;color:var(--murekkep-2);
+  text-align:right}
+
+.sutunlar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;
+  margin-top:14px;padding-top:12px;border-top:1px dashed var(--cizgi-kuvvetli)}
+.sutunlar .bs{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--murekkep-2);text-align:center;line-height:1.3}
+.sutunlar .bs small{display:block;font-size:7.5px;opacity:.72;letter-spacing:.04em}
+.sutunlar .hc{font-family:var(--mono);font-size:15px;font-weight:600;text-align:center;
+  letter-spacing:-.03em;padding-top:3px;line-height:1.15}
+.sutunlar .hc:first-child{font-size:12.5px;font-weight:500;padding-top:5px}
+.sutunlar .hc.sonuk{font-weight:400;color:var(--murekkep-2)}
+
+/* ---------- Bölge özeti ---------- */
+.ozet{margin:14px 20px 0;padding:13px 16px;border-left:3px solid var(--petrol);
+  background:rgba(14,91,84,.06)}
 .ozet-baslik{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--murekkep-2)}
-.ozet-satir{display:flex;align-items:baseline;gap:6px;margin-top:6px}
-.ozet-buyuk{font-family:var(--mono);font-weight:600;font-size:28px;letter-spacing:-.02em;line-height:1}
-.ozet-bolen{color:var(--murekkep-2);font-size:20px;font-family:var(--mono)}
-.ozet-orta{font-family:var(--mono);font-weight:500;font-size:20px;color:var(--murekkep-2)}
-.ozet-birim{font-family:var(--mono);font-size:11px;color:var(--murekkep-2);margin-left:2px}
-.ozet-legend{display:flex;gap:14px;margin-top:9px;font-family:var(--mono);
-  font-size:10.5px;color:var(--murekkep-2)}
-.ozet-legend i{display:inline-block;width:16px;height:8px;margin-right:5px;vertical-align:1px}
-.i-isl{background:var(--damar);border-top:2px solid var(--oker)}
-.i-kay{background:repeating-linear-gradient(135deg,var(--cizgi-kuvvetli) 0 1px,transparent 1px 4px);
-  border:1px solid var(--cizgi-kuvvetli)}
+.ozet-satir{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.ozet-deger{font-family:var(--mono);font-weight:500;font-size:17px;letter-spacing:-.025em;line-height:1}
+.ozet-bolen{color:var(--murekkep-2);font-size:15px;font-family:var(--mono)}
+.ozet-birim{font-family:var(--mono);font-size:10px;color:var(--murekkep-2);margin-left:2px}
 
-.liste{padding:4px 20px 0}
-.saha{display:block;width:100%;text-align:left;background:var(--kart);
-  border:1px solid var(--cizgi);border-radius:3px;padding:13px 14px 12px;margin:10px 0;
-  cursor:pointer;font:inherit;color:inherit}
-.saha[aria-expanded=true]{border-color:var(--petrol)}
-.saha-ust{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.saha-ad{font-family:var(--kondens);font-weight:700;font-size:19px;line-height:1.1;
-  letter-spacing:-.018em;margin:0}
-.saha-yer{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--murekkep-2);
-  margin-top:3px;text-transform:uppercase}
-.rozet{flex:none;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
-  padding:3px 6px;border-radius:2px;border:1px solid var(--cizgi-kuvvetli);color:var(--murekkep-2)}
-.rozet.aktif{background:var(--petrol);border-color:var(--petrol);color:#EAF0EE}
-.rozet.etut{background:transparent;border-color:var(--oker);color:#8A6112}
+.bos{margin:16px 20px 0;padding:34px 20px;text-align:center;color:var(--murekkep-2);
+  font-family:var(--mono);font-size:12.5px;line-height:1.7;
+  border:1px dashed var(--cizgi-kuvvetli);border-radius:3px}
 
-.damar{position:relative;height:19px;margin:12px 0 10px;
-  background:repeating-linear-gradient(135deg,rgba(21,32,29,.11) 0 1px,transparent 1px 5px);
-  border-bottom:1px solid var(--cizgi-kuvvetli)}
-.damar-kaynak{position:absolute;inset:0 auto 0 0;
-  background:repeating-linear-gradient(135deg,rgba(21,32,29,.3) 0 1px,transparent 1px 4px);
-  border-right:1px solid var(--cizgi-kuvvetli);transition:width .45s cubic-bezier(.2,.7,.3,1)}
-.damar-isl{position:absolute;inset:0 auto 0 0;background:var(--damar);
-  border-top:3px solid var(--oker);transition:width .45s cubic-bezier(.2,.7,.3,1)}
-.damar-oran{position:absolute;right:0;top:50%;transform:translateY(-50%);font-family:var(--mono);
-  font-size:10px;font-weight:500;color:var(--murekkep-2);padding-left:6px;
-  background:linear-gradient(90deg,transparent,var(--kart) 6px)}
-
-.deger-satir{display:flex;gap:18px}
-.deger{flex:1}
-.deger .et{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--murekkep-2)}
-.deger .sy{font-family:var(--mono);font-weight:600;font-size:19px;letter-spacing:-.01em;margin-top:1px}
-.deger .sy small{font-size:10px;font-weight:400;color:var(--murekkep-2);margin-left:3px}
-
-.detay{display:none;margin-top:12px;padding-top:11px;border-top:1px dashed var(--cizgi-kuvvetli)}
-.saha[aria-expanded=true] .detay{display:block}
-.detay dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0}
-.detay dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--murekkep-2)}
-.detay dd{margin:0;font-family:var(--mono);font-size:13px;text-align:right}
-.detay .not{margin:10px 0 0;font-size:12.5px;line-height:1.5;color:var(--murekkep-2)}
-
-.bos{padding:44px 20px;text-align:center;color:var(--murekkep-2);
-  font-family:var(--mono);font-size:12.5px;line-height:1.7}
-
-/* ---- Veri paneli ---- */
+/* ---------- Veri paneli ---------- */
 .veri{margin:26px 20px 0;border:1px solid var(--cizgi-kuvvetli);border-radius:3px;background:var(--kart)}
-.veri > summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;
-  justify-content:space-between;align-items:center;gap:10px}
+.veri > summary{list-style:none;cursor:pointer;padding:14px 16px}
 .veri > summary::-webkit-details-marker{display:none}
 .veri-baslik{font-family:var(--mono);font-size:10px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--petrol)}
-.veri-durum{font-family:var(--mono);font-size:11px;color:var(--murekkep-2);text-align:right}
 .veri-ic{padding:0 16px 16px;border-top:1px solid var(--cizgi)}
 .veri-ic p{margin:12px 0 0;font-size:13px;line-height:1.55;color:var(--murekkep-2)}
 .veri-ic code{font-family:var(--mono);font-size:12px;background:rgba(21,32,29,.07);
@@ -143,54 +142,36 @@ input[type=search]{margin-top:9px}
 .sonuc.iyi{color:var(--petrol)}
 .sonuc.kotu{color:#8A2B12}
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="kabuk">
 
   <header class="ust">
-    <p class="eyebrow">Genel Müdürlük · Saha Envanteri</p>
-    <h1>Linyit Saha<br><em>Rezerv Kütüğü</em></h1>
-    <p class="altbilgi" id="ustSayac"></p>
+    <p class="eyebrow">TKİ Saha Envanteri</p>
+    <h1>Linyit Sahaları<br><em>Rezerv Bilgileri</em></h1>
   </header>
 
-  <div class="uyari" id="uyari">
-    <span>ÖRNEK VERİ — rakamlar temsilidir</span>
-    <a href="#veri">veri yükle</a>
+  <div class="kumanda">
+    <nav class="bolgeler" id="bolgeler" aria-label="Bölge seçimi"></nav>
+    <div class="alan">
+      <label for="saha">Saha</label>
+      <select id="saha"></select>
+    </div>
+    <div class="ara-sar">
+      <input type="search" id="ara" placeholder="Saha adı ara…" aria-label="Saha adı ara">
+      <button class="temizle" id="temizle" type="button" aria-label="Aramayı temizle">×</button>
+    </div>
+    <div class="sonuclar" id="sonuclar"></div>
   </div>
 
-  <div class="filtre">
-    <div class="filtre-satir">
-      <div class="alan"><label for="il">İl</label><select id="il"></select></div>
-      <div class="alan"><label for="ilce">İlçe</label><select id="ilce"></select></div>
-    </div>
-    <input type="search" id="ara" placeholder="Saha adı ara…" aria-label="Saha adı ara">
-  </div>
-
-  <section class="ozet">
-    <div class="ozet-baslik" id="ozetBaslik">Türkiye geneli</div>
-    <div class="ozet-satir">
-      <span class="ozet-buyuk" id="ozetKaynak">—</span>
-      <span class="ozet-bolen">/</span>
-      <span class="ozet-orta" id="ozetIsl">—</span>
-      <span class="ozet-birim">milyon ton</span>
-    </div>
-    <div class="ozet-legend">
-      <span><i class="i-kay"></i>kaynak</span>
-      <span><i class="i-isl"></i>işletilebilir</span>
-    </div>
-  </section>
-
-  <main class="liste" id="liste"></main>
+  <div id="govde"></div>
 
   <details class="veri" id="veri">
-    <summary>
-      <span class="veri-baslik">Veri kaynağı</span>
-      <span class="veri-durum" id="veriDurum">—</span>
-    </summary>
+    <summary><span class="veri-baslik">Veri Kaynağı</span></summary>
     <div class="veri-ic">
-      <p>Excel'de <strong>Farklı Kaydet → CSV (noktalı virgülle ayrılmış)</strong> deyip çıkan dosyayı buraya yükleyin. Sütun başlıkları şablondaki gibi olsun.</p>
+      <p>Excel'de <strong>Farklı Kaydet → CSV (noktalı virgülle ayrılmış)</strong> deyip çıkan dosyayı buraya yükleyin.</p>
 
       <div class="dugmeler">
         <button class="dg" type="button" onclick="document.getElementById('dosya').click()">CSV dosyası yükle</button>
@@ -201,52 +182,50 @@ input[type=search]{margin-top:9px}
       <p class="sonuc" id="sonuc"></p>
 
       <div class="gizlilik">
-        Yüklediğiniz dosya bu telefondan çıkmaz. Sunucuya gönderilmez, yalnızca cihazın kendi
-        hafızasında saklanır ve sadece bu uygulama okur. Telefonu değiştirirseniz dosyayı
-        yeniden yüklemeniz gerekir.
+        Yüklediğiniz dosya bu cihazdan çıkmaz. Sunucuya gönderilmez, yalnızca telefonun kendi
+        hafızasında saklanır ve sadece bu uygulama okur.
       </div>
 
-      <p><strong>Sütunlar:</strong> <code>ad; il; ilce; kaynak; isletilebilir; aid; durum; ruhsat; not</code>
-      — kaynak ve işletilebilir milyon ton, aid kcal/kg, durum <code>aktif</code> /
-      <code>etut</code> / <code>beklemede</code>.</p>
+      <p><strong>Sütunlar:</strong> <code>bolge; il; ad; isletme; kaynak; isletilebilir; kalori</code><br>
+      Bölge sütununa <code>GLİ</code>, <code>ELİ</code>, <code>ÇLİ</code> yazın; boş bırakılan ya da
+      tanınmayan satırlar <code>Diğer</code> grubuna düşer. İşletme sütununa <code>Yeraltı</code> ya da
+      <code>Açık ocak</code> yazın. Rezervler milyon ton, kalori kcal/kg.</p>
     </div>
   </details>
 </div>
 
 <script>
-/* ---------- Örnek veri (kendi verinizi yükleyene kadar görünür) ---------- */
+const BOLGELER = ["GLİ","ELİ","ÇLİ","Diğer"];
+
 const ORNEK = [
-  {ad:"Tunçbilek",  il:"Kütahya",       ilce:"Tavşanlı",  kaynak:412.0,  isletilebilir:288.4, aid:2150, durum:"aktif",     ruhsat:"—", not:"Ömerler ve Beke panolarını kapsar."},
-  {ad:"Soma",       il:"Manisa",        ilce:"Soma",      kaynak:680.5,  isletilebilir:476.4, aid:2600, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Orhaneli",   il:"Bursa",         ilce:"Orhaneli",  kaynak:118.0,  isletilebilir:82.6,  aid:2900, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Keles",      il:"Bursa",         ilce:"Keles",     kaynak:96.4,   isletilebilir:67.5,  aid:2350, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Tufanbeyli", il:"Adana",         ilce:"Tufanbeyli",kaynak:325.0,  isletilebilir:227.5, aid:1750, durum:"aktif",     ruhsat:"—", not:"Sahada kurulu santral mevcut."},
-  {ad:"Dinar",      il:"Afyonkarahisar",ilce:"Dinar",     kaynak:204.0,  isletilebilir:142.8, aid:1900, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Karapınar",  il:"Konya",         ilce:"Karapınar", kaynak:1820.0, isletilebilir:1274.0,aid:1550, durum:"aktif",     ruhsat:"—", not:"Derin havza; açık işletme derinliği kritik."},
-  {ad:"Ilgın",      il:"Konya",         ilce:"Ilgın",     kaynak:157.3,  isletilebilir:110.1, aid:1450, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Akören",     il:"Kahramanmaraş", ilce:"Elbistan",  kaynak:940.0,  isletilebilir:658.0, aid:1200, durum:"aktif",     ruhsat:"20062770", not:"Afşin-Elbistan havzası."},
-  {ad:"Çayırhan",   il:"Ankara",        ilce:"Nallıhan",  kaynak:186.0,  isletilebilir:130.2, aid:2800, durum:"aktif",     ruhsat:"—", not:""},
-  {ad:"Muş",        il:"Muş",           ilce:"Merkez",    kaynak:88.2,   isletilebilir:61.7,  aid:1650, durum:"etut",      ruhsat:"—", not:""},
-  {ad:"Karlıova",   il:"Bingöl",        ilce:"Karlıova",  kaynak:64.0,   isletilebilir:44.8,  aid:1800, durum:"etut",      ruhsat:"—", not:""},
-  {ad:"Alaca",      il:"Çorum",         ilce:"Alaca",     kaynak:52.6,   isletilebilir:36.8,  aid:2050, durum:"etut",      ruhsat:"—", not:""},
-  {ad:"Alpu",       il:"Eskişehir",     ilce:"Alpu",      kaynak:1380.0, isletilebilir:966.0, aid:2100, durum:"beklemede", ruhsat:"—", not:"Havza tümüyle yeraltı işletmesine uygun."},
-  {ad:"Saray",      il:"Tekirdağ",      ilce:"Saray",     kaynak:132.0,  isletilebilir:92.4,  aid:2400, durum:"beklemede", ruhsat:"—", not:"Trakya havzası."},
-  {ad:"Malkara",    il:"Tekirdağ",      ilce:"Malkara",   kaynak:76.8,   isletilebilir:53.8,  aid:2250, durum:"beklemede", ruhsat:"—", not:"Trakya havzası."}
+  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   kaynak:186.0, isletilebilir:130.2, kalori:2150},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık ocak", kaynak:142.4, isletilebilir:99.7,  kalori:2300},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık ocak", kaynak:64.8,  isletilebilir:45.4,  kalori:2050},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   kaynak:38.2,  isletilebilir:26.7,  kalori:1950},
+  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   kaynak:246.0, isletilebilir:172.2, kalori:2600},
+  {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık ocak", kaynak:118.5, isletilebilir:83.0,  kalori:2450},
+  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık ocak", kaynak:92.0,  isletilebilir:64.4,  kalori:2380},
+  {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   kaynak:74.6,  isletilebilir:52.2,  kalori:2520},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık ocak", kaynak:58.4,  isletilebilir:40.9,  kalori:3100},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık ocak", kaynak:41.2,  isletilebilir:28.8,  kalori:2950},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık ocak", kaynak:33.0,  isletilebilir:23.1,  kalori:3050},
+  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık ocak", kaynak:157.3, isletilebilir:110.1, kalori:1450},
+  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   kaynak:52.6,  isletilebilir:36.8,  kalori:2050},
+  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık ocak", kaynak:88.2,  isletilebilir:61.7,  kalori:1650},
+  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   kaynak:64.0,  isletilebilir:44.8,  kalori:1800}
 ];
 
-const ANAHTAR = "linyit-saha-verisi";
+const ANAHTAR = "tki-saha-verisi";
 let SAHALAR = ORNEK, kendiVeri = false, kayitTarihi = "";
+let secili = "GLİ", arama = "", sahaIndeks = null;
 
-/* ---------- Cihaz hafızası ---------- */
 const kasa = {
   oku(){ try{ return localStorage.getItem(ANAHTAR); }catch(e){ return null; } },
   yaz(v){ try{ localStorage.setItem(ANAHTAR,v); return true; }catch(e){ return false; } },
   sil(){ try{ localStorage.removeItem(ANAHTAR); }catch(e){} }
 };
-
 function kayitliVeriyiAl(){
-  const ham = kasa.oku();
-  if(!ham) return;
+  const ham = kasa.oku(); if(!ham) return;
   try{
     const p = JSON.parse(ham);
     if(Array.isArray(p.sahalar) && p.sahalar.length){
@@ -259,13 +238,14 @@ function kayitliVeriyiAl(){
 function satirlariAyir(metin){
   const cikti=[]; let alan="", satir=[], tirnak=false;
   metin = metin.replace(/^\uFEFF/,"").replace(/\r\n?/g,"\n");
-  const ayrac = (metin.split("\n")[0].split(";").length > metin.split("\n")[0].split(",").length) ? ";" : ",";
+  const ilk = metin.split("\n")[0];
+  const ayrac = ilk.split(";").length > ilk.split(",").length ? ";" : ",";
   for(let i=0;i<metin.length;i++){
     const k = metin[i];
     if(tirnak){
       if(k === '"'){ if(metin[i+1] === '"'){ alan+='"'; i++; } else tirnak=false; }
       else alan += k;
-    } else if(k === '"'){ tirnak = true; }
+    } else if(k === '"') tirnak = true;
     else if(k === ayrac){ satir.push(alan); alan=""; }
     else if(k === "\n"){ satir.push(alan); cikti.push(satir); satir=[]; alan=""; }
     else alan += k;
@@ -273,33 +253,27 @@ function satirlariAyir(metin){
   satir.push(alan); cikti.push(satir);
   return cikti.filter(s => s.some(h => h.trim() !== ""));
 }
-
 const sadelestir = s => s.toString().trim().toLocaleLowerCase("tr")
   .replace(/ı/g,"i").replace(/ş/g,"s").replace(/ğ/g,"g")
-  .replace(/ü/g,"u").replace(/ö/g,"o").replace(/ç/g,"c")
-  .replace(/[^a-z]/g,"");
+  .replace(/ü/g,"u").replace(/ö/g,"o").replace(/ç/g,"c").replace(/[^a-z]/g,"");
 
 const ESLESME = {
-  ad:["ad","sahaadi","saha","sahaad","adi","sahaismi","isim"],
-  il:["il","sehir"],
-  ilce:["ilce"],
-  kaynak:["kaynak","kaynakrezerv","toplamrezerv","gorunurrezerv","rezerv"],
+  bolge:["bolge","isletmemudurlugu","muessese","birim","bolgemudurlugu"],
+  il:["il","sehir","baglioldugil","baglioldugu"],
+  ad:["ad","saha","sahaadi","adi","sahaismi","isim"],
+  isletme:["isletme","isletmeturu","isletmesekli","yontem","uretimyontemi","ocak","ocakturu","tur"],
+  kaynak:["kaynak","kaynakrezerv","toplamrezerv","rezerv","gorunurrezerv"],
   isletilebilir:["isletilebilir","isletilebilirrezerv","uretilebilir","kazanilabilir"],
-  aid:["aid","altisildeger","kalori","kalorifikdeger","kcal"],
-  durum:["durum","statu"],
-  ruhsat:["ruhsat","ruhsatno","sicil","sicilno","ruhsatsicil"],
-  not:["not","aciklama","notlar"]
+  kalori:["kalori","aid","altisildeger","kalorifikdeger","kcal","isildeger"]
 };
-
 function sutunlariEsle(basliklar){
-  const harita = {};
+  const h = {};
   basliklar.forEach((b,i) => {
     const s = sadelestir(b);
-    for(const alan in ESLESME) if(ESLESME[alan].includes(s)) harita[alan] = i;
+    for(const a in ESLESME) if(ESLESME[a].includes(s) && h[a] === undefined) h[a] = i;
   });
-  return harita;
+  return h;
 }
-
 function sayiyaCevir(ham){
   if(ham == null) return 0;
   let t = ham.toString().trim().replace(/\s/g,"");
@@ -310,159 +284,205 @@ function sayiyaCevir(ham){
   const n = parseFloat(t);
   return isFinite(n) ? n : 0;
 }
-
+function bolgeCoz(ham){
+  const s = sadelestir(ham);
+  if(s.startsWith("gli") || s.includes("garp")) return "GLİ";
+  if(s.startsWith("eli") || s.includes("ege"))  return "ELİ";
+  if(s.startsWith("cli") || s.includes("can"))  return "ÇLİ";
+  return "Diğer";
+}
+function isletmeCoz(ham){
+  const t = (ham || "").toString().trim();
+  if(!t) return "";
+  const s = sadelestir(t);
+  if(s.includes("yeralti") || s === "ya" || s === "ye") return "Yeraltı";
+  if(s.includes("acik") || s === "ao" || s.includes("ocak")) return "Açık ocak";
+  return t;
+}
 function csvYukle(metin){
   const satirlar = satirlariAyir(metin);
   if(satirlar.length < 2) throw new Error("Dosyada başlık satırı ve en az bir saha satırı olmalı.");
   const h = sutunlariEsle(satirlar[0]);
-  const eksik = ["ad","il","ilce","kaynak","isletilebilir"].filter(a => h[a] === undefined);
+  const eksik = ["ad","kaynak","isletilebilir"].filter(a => h[a] === undefined);
   if(eksik.length) throw new Error("Şu sütunlar bulunamadı: " + eksik.join(", "));
-
   const al = (s,a) => h[a] !== undefined ? (s[h[a]] || "").toString().trim() : "";
-  const yeni = satirlar.slice(1)
-    .filter(s => al(s,"ad"))
-    .map(s => ({
-      ad: al(s,"ad"), il: al(s,"il"), ilce: al(s,"ilce") || "Merkez",
-      kaynak: sayiyaCevir(al(s,"kaynak")),
-      isletilebilir: sayiyaCevir(al(s,"isletilebilir")),
-      aid: Math.round(sayiyaCevir(al(s,"aid"))),
-      durum: (["aktif","etut","beklemede"].includes(sadelestir(al(s,"durum")))
-              ? sadelestir(al(s,"durum")) : "aktif"),
-      ruhsat: al(s,"ruhsat") || "—",
-      not: al(s,"not")
-    }));
+  const yeni = satirlar.slice(1).filter(s => al(s,"ad")).map(s => ({
+    bolge: bolgeCoz(al(s,"bolge")), il: al(s,"il"), ad: al(s,"ad"),
+    isletme: isletmeCoz(al(s,"isletme")),
+    kaynak: sayiyaCevir(al(s,"kaynak")),
+    isletilebilir: sayiyaCevir(al(s,"isletilebilir")),
+    kalori: Math.round(sayiyaCevir(al(s,"kalori")))
+  }));
   if(!yeni.length) throw new Error("Okunabilir saha satırı bulunamadı.");
   return yeni;
 }
 
+/* Excel Türkçe CSV'yi bazen windows-1254 ile kaydeder; ikisini de tanı */
+function metniCoz(tampon){
+  let metin = new TextDecoder("utf-8").decode(tampon);
+  if(metin.includes("\uFFFD")){
+    try{ metin = new TextDecoder("windows-1254").decode(tampon); }catch(e){}
+  }
+  return metin;
+}
+
 document.getElementById("dosya").addEventListener("change", ev => {
-  const dosya = ev.target.files[0];
-  if(!dosya) return;
+  const dosya = ev.target.files[0]; if(!dosya) return;
   const oku = new FileReader();
   oku.onload = () => {
     try{
-      const yeni = csvYukle(oku.result);
+      const yeni = csvYukle(metniCoz(oku.result));
       kayitTarihi = new Date().toLocaleDateString("tr-TR");
       const saklandi = kasa.yaz(JSON.stringify({sahalar:yeni, tarih:kayitTarihi}));
-      SAHALAR = yeni; kendiVeri = true;
-      ilSec.value = ""; ilceleriDoldur(); araKutu.value = "";
+      SAHALAR = yeni; kendiVeri = true; arama = ""; sahaIndeks = null;
+      $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
+      secili = BOLGELER.find(b => yeni.some(s => s.bolge === b)) || "GLİ";
       ciz();
-      bildir(yeni.length + " saha yüklendi." +
-        (saklandi ? " Cihazda saklandı." : " Bu tarayıcı kalıcı saklamaya izin vermedi; uygulamayı kapatınca silinir."), true);
-    }catch(hata){
-      bildir(hata.message, false);
-    }
+      bildir(yeni.length + " saha yüklendi." + (saklandi ? " Cihazda saklandı."
+        : " Bu tarayıcı kalıcı saklamaya izin vermedi; uygulamayı kapatınca silinir."), true);
+    }catch(hata){ bildir(hata.message, false); }
   };
   oku.onerror = () => bildir("Dosya okunamadı.", false);
-  oku.readAsText(dosya, "utf-8");
+  oku.readAsArrayBuffer(dosya);
   ev.target.value = "";
 });
-
 function bildir(mesaj, iyi){
   const el = document.getElementById("sonuc");
   el.textContent = mesaj;
   el.className = "sonuc " + (iyi ? "iyi" : "kotu");
   document.getElementById("veri").open = true;
 }
-
 function veriyiSil(){
   if(!confirm("Cihazdaki saha verisi silinsin mi? Örnek veriye dönülür.")) return;
   kasa.sil(); SAHALAR = ORNEK; kendiVeri = false; kayitTarihi = "";
-  ilSec.value = ""; ilceleriDoldur(); ciz();
-  bildir("Veri silindi.", true);
+  secili = "GLİ"; arama = ""; sahaIndeks = null;
+  $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
+  ciz(); bildir("Veri silindi.", true);
 }
-
 function sablonIndir(){
-  const bas = "ad;il;ilce;kaynak;isletilebilir;aid;durum;ruhsat;not";
-  const govde = SAHALAR.map(s => [s.ad,s.il,s.ilce,
-    s.kaynak.toString().replace(".",","), s.isletilebilir.toString().replace(".",","),
-    s.aid, s.durum, s.ruhsat, s.not].join(";")).join("\n");
+  const bas = "bolge;il;ad;isletme;kaynak;isletilebilir;kalori";
+  const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "",
+    s.kaynak.toString().replace(".",","),
+    s.isletilebilir.toString().replace(".",","), s.kalori].join(";")).join("\n");
   const bag = document.createElement("a");
-  bag.href = URL.createObjectURL(new Blob(["\uFEFF" + bas + "\n" + govde],
-    {type:"text/csv;charset=utf-8"}));
-  bag.download = "saha-kunyesi-sablon.csv";
-  bag.click();
-  URL.revokeObjectURL(bag.href);
+  bag.href = URL.createObjectURL(new Blob(["\uFEFF"+bas+"\n"+govde], {type:"text/csv;charset=utf-8"}));
+  bag.download = "tki-saha-kunyesi-sablon.csv";
+  bag.click(); URL.revokeObjectURL(bag.href);
 }
 
 /* ---------- Arayüz ---------- */
 const $ = s => document.querySelector(s);
 const sayi = (n,o=1) => n.toLocaleString("tr-TR",{minimumFractionDigits:o,maximumFractionDigits:o});
 const tam  = n => n.toLocaleString("tr-TR",{maximumFractionDigits:0});
-const ROZET = {aktif:["aktif","aktif"], etut:["etüt","etut"], beklemede:["beklemede",""]};
 
-const ilSec = $("#il"), ilceSec = $("#ilce"), araKutu = $("#ara");
+/* Seçim listesine girecek sahalar: arama varsa tüm bölgeler, yoksa seçili bölge */
+function adaylar(){
+  if(arama){
+    const q = arama.toLocaleLowerCase("tr");
+    return SAHALAR.map((s,i) => ({s,i}))
+      .filter(o => o.s.ad.toLocaleLowerCase("tr").includes(q)
+                || (o.s.il||"").toLocaleLowerCase("tr").includes(q));
+  }
+  return SAHALAR.map((s,i) => ({s,i})).filter(o => o.s.bolge === secili);
+}
 
-function illeriDoldur(){
-  const secili = ilSec.value;
-  const iller = [...new Set(SAHALAR.map(s => s.il))].sort((a,b) => a.localeCompare(b,"tr"));
-  ilSec.innerHTML = '<option value="">Tümü</option>' + iller.map(i => `<option>${i}</option>`).join("");
-  if(iller.includes(secili)) ilSec.value = secili;
-  ilceleriDoldur();
+function butonlariCiz(){
+  $("#bolgeler").innerHTML = BOLGELER.map(b => {
+    const adet = SAHALAR.filter(s => s.bolge === b).length;
+    return `<button class="bolge" type="button" aria-pressed="${!arama && b===secili}"
+      onclick="bolgeSec('${b}')"><b>${b}</b><span>${adet} saha</span></button>`;
+  }).join("");
 }
-function ilceleriDoldur(){
-  const il = ilSec.value;
-  if(!il){ ilceSec.innerHTML = '<option value="">Tümü</option>'; ilceSec.disabled = true; return; }
-  const ilceler = [...new Set(SAHALAR.filter(s => s.il === il).map(s => s.ilce))]
-    .sort((a,b) => a.localeCompare(b,"tr"));
-  ilceSec.disabled = false;
-  ilceSec.innerHTML = '<option value="">Tümü</option>' + ilceler.map(i => `<option>${i}</option>`).join("");
+function bolgeSec(b){
+  if(arama){ arama = ""; $("#ara").value = ""; $("#temizle").classList.remove("gorunur"); }
+  secili = b; sahaIndeks = null;
+  ciz();
 }
-function suzulmus(){
-  const il = ilSec.value, ilce = ilceSec.value;
-  const q = araKutu.value.trim().toLocaleLowerCase("tr");
-  return SAHALAR
-    .filter(s => (!il || s.il === il) && (!ilce || s.ilce === ilce) &&
-                 (!q || s.ad.toLocaleLowerCase("tr").includes(q)))
-    .sort((a,b) => b.kaynak - a.kaynak);
+
+function sahaListesiniDoldur(liste){
+  const sec = $("#saha");
+  if(!liste.length){
+    sec.innerHTML = '<option value="">— saha yok —</option>';
+    sec.disabled = true; sahaIndeks = null; return;
+  }
+  sec.disabled = false;
+  const sirali = liste.slice().sort((a,b) => a.s.ad.localeCompare(b.s.ad,"tr"));
+  if(sahaIndeks !== null && !liste.some(o => o.i === sahaIndeks)) sahaIndeks = null;
+  sec.innerHTML = '<option value=""' + (sahaIndeks===null?" selected":"") + '>— Saha Seçin —</option>'
+    + sirali.map(o =>
+      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${o.s.ad}${arama?" — "+o.s.bolge:""}</option>`
+    ).join("");
+}
+
+function ozetKutusu(bolge){
+  const liste = SAHALAR.filter(x => x.bolge === bolge);
+  if(!liste.length) return "";
+  return `<section class="ozet">
+      <div class="ozet-baslik">${bolge} toplamı · ${liste.length} saha</div>
+      <div class="ozet-satir">
+        <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.kaynak,0))}</span>
+        <span class="ozet-bolen">/</span>
+        <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.isletilebilir,0))}</span>
+        <span class="ozet-birim">milyon ton · Kaynak / İşletilebilir</span>
+      </div>
+    </section>`;
+}
+
+function sahaSec(i){ sahaIndeks = i; ciz(); }
+
+function sonuclariCiz(liste){
+  const kap = $("#sonuclar");
+  if(!arama){ kap.className = "sonuclar"; kap.innerHTML = ""; return; }
+  kap.className = "sonuclar gorunur";
+  if(!liste.length){ kap.innerHTML = '<p class="sonuc-bos">Eşleşen saha yok.</p>'; return; }
+  const sirali = liste.slice().sort((a,b) => a.s.ad.localeCompare(b.s.ad,"tr"));
+  kap.innerHTML = sirali.slice(0,10).map(o =>
+    `<button class="sonuc-sat" type="button" aria-current="${o.i===sahaIndeks}"
+      onclick="sahaSec(${o.i})"><strong>${o.s.ad}</strong>
+      <em>${o.s.il || "—"} · ${o.s.bolge}</em></button>`).join("")
+    + (sirali.length > 10 ? `<p class="sonuc-bos">${sirali.length} sonuçtan ilk 10'u</p>` : "");
 }
 
 function ciz(){
-  document.getElementById("uyari").classList.toggle("gorunur", !kendiVeri);
-  document.getElementById("veriDurum").textContent = kendiVeri
-    ? `cihazınızda · ${SAHALAR.length} saha${kayitTarihi ? " · " + kayitTarihi : ""}`
-    : "örnek veri";
+  butonlariCiz();
+  const liste = adaylar();
+  sahaListesiniDoldur(liste);
+  sonuclariCiz(liste);
 
-  const veri = suzulmus();
-  const enBuyuk = Math.max(...veri.map(s => s.kaynak), 1);
-  $("#ozetKaynak").textContent = tam(veri.reduce((t,s) => t + s.kaynak, 0));
-  $("#ozetIsl").textContent    = tam(veri.reduce((t,s) => t + s.isletilebilir, 0));
-  $("#ozetBaslik").textContent = ilceSec.value ? `${ilSec.value} · ${ilceSec.value}`
-                               : ilSec.value ? ilSec.value : "Türkiye geneli";
-  $("#ustSayac").textContent = `${SAHALAR.length} saha · ${new Set(SAHALAR.map(s=>s.il)).size} il · `
-    + `${tam(SAHALAR.reduce((t,s)=>t+s.kaynak,0))} milyon ton kaynak`;
-
-  if(!veri.length){
-    $("#liste").innerHTML = '<p class="bos">Bu seçimde kayıtlı saha yok.<br>İl veya ilçe seçimini genişletin.</p>';
+  if(sahaIndeks === null){
+    const mesaj = !liste.length
+      ? (arama ? "Aramanıza uyan saha bulunamadı."
+               : "Bu bölgede kayıtlı saha yok.<br>CSV'de bölge sütununu kontrol edin.")
+      : "Yukarıdaki menüden bir saha seçin.";
+    $("#govde").innerHTML = '<p class="bos">' + mesaj + '</p>'
+      + (arama ? "" : ozetKutusu(secili));
     return;
   }
 
-  $("#liste").innerHTML = veri.map(s => {
-    const oran = s.kaynak ? Math.round(s.isletilebilir / s.kaynak * 100) : 0;
-    const [etiket, sinif] = ROZET[s.durum] || [s.durum, ""];
-    return `<button class="saha" type="button" aria-expanded="false" onclick="ac(this)">
-      <div class="saha-ust">
-        <div><h3 class="saha-ad">${s.ad}</h3>
-        <div class="saha-yer">${s.il} · ${s.ilce}</div></div>
-        <span class="rozet ${sinif}">${etiket}</span>
-      </div>
+  const s = SAHALAR[sahaIndeks];
+  const bolgeSahalari = SAHALAR.filter(x => x.bolge === s.bolge);
+  const enBuyuk = Math.max(...bolgeSahalari.map(x => x.kaynak), 1);
+
+  $("#govde").innerHTML = `
+    <article class="saha-kart">
+      <h2 class="saha-ad">${s.ad}</h2>
+      <div class="saha-yer">${s.il || "—"} · <b>${s.bolge}</b></div>
       <div class="damar" role="img" aria-label="Kaynak ${sayi(s.kaynak)}, işletilebilir ${sayi(s.isletilebilir)} milyon ton">
         <div class="damar-kaynak" style="width:0" data-w="${s.kaynak/enBuyuk*100}"></div>
         <div class="damar-isl" style="width:0" data-w="${s.isletilebilir/enBuyuk*100}"></div>
-        <span class="damar-oran">%${oran}</span>
       </div>
-      <div class="deger-satir">
-        <div class="deger"><div class="et">Kaynak</div><div class="sy">${sayi(s.kaynak)}<small>Mt</small></div></div>
-        <div class="deger"><div class="et">İşletilebilir</div><div class="sy">${sayi(s.isletilebilir)}<small>Mt</small></div></div>
+      <div class="damar-not">Ölçek: ${s.bolge} En Büyük Sahası</div>
+      <div class="sutunlar">
+        <span class="bs">İşletme</span>
+        <span class="bs">Kaynak<small>milyon ton</small></span>
+        <span class="bs">İşletilebilir<small>milyon ton</small></span>
+        <span class="bs">Kalori<small>kcal/kg</small></span>
+        <span class="hc">${s.isletme || "—"}</span>
+        <span class="hc">${sayi(s.kaynak)}</span>
+        <span class="hc">${sayi(s.isletilebilir)}</span>
+        <span class="hc sonuk">${s.kalori ? tam(s.kalori) : "—"}</span>
       </div>
-      <div class="detay"><dl>
-        <dt>Alt ısıl değer</dt><dd>${s.aid ? tam(s.aid) + " kcal/kg" : "—"}</dd>
-        <dt>Kazanılabilirlik</dt><dd>%${oran}</dd>
-        <dt>Ruhsat sicil</dt><dd>${s.ruhsat || "—"}</dd>
-        <dt>Isıl eşdeğer</dt><dd>${s.aid ? tam(s.isletilebilir*s.aid/1000) + " Gcal ×10³" : "—"}</dd>
-      </dl>${s.not ? `<p class="not">${s.not}</p>` : ""}</div>
-    </button>`;
-  }).join("");
+    </article>` + ozetKutusu(s.bolge);
 
   requestAnimationFrame(() => {
     document.querySelectorAll(".damar-kaynak,.damar-isl")
@@ -470,18 +490,23 @@ function ciz(){
   });
 }
 
-function ac(btn){
-  const acik = btn.getAttribute("aria-expanded") === "true";
-  document.querySelectorAll(".saha").forEach(b => b.setAttribute("aria-expanded","false"));
-  btn.setAttribute("aria-expanded", acik ? "false" : "true");
-}
-
-ilSec.addEventListener("change", () => { ilceleriDoldur(); ciz(); });
-ilceSec.addEventListener("change", ciz);
-araKutu.addEventListener("input", ciz);
+$("#saha").addEventListener("change", ev => {
+  const v = ev.target.value;
+  sahaIndeks = v === "" ? null : parseInt(v,10);
+  ciz();
+});
+$("#ara").addEventListener("input", ev => {
+  arama = ev.target.value.trim();
+  $("#temizle").classList.toggle("gorunur", arama !== "");
+  sahaIndeks = null;
+  ciz();
+});
+$("#temizle").addEventListener("click", () => {
+  arama = ""; $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
+  sahaIndeks = null; ciz();
+});
 
 kayitliVeriyiAl();
-illeriDoldur();
 ciz();
 
 if("serviceWorker" in navigator){
