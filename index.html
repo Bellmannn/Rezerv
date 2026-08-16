@@ -29,11 +29,19 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
 .kabuk{max-width:560px;margin:0 auto}
 
 /* ---------- Başlık ---------- */
-.ust{background:var(--petrol-koyu);color:#EAF0EE;padding:22px 20px 20px;
+.ust{position:relative;background:var(--petrol-koyu);color:#EAF0EE;padding:22px 20px 22px;
   padding-top:calc(22px + env(safe-area-inset-top));
   background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.055) 0 1px,transparent 1px 7px)}
+.ust-satir{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:7px}
 .ust .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;
-  color:rgba(234,240,238,.62);margin:0 0 7px}
+  color:rgba(234,240,238,.62);margin:0;line-height:1.35}
+.ust .daire{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;
+  color:rgba(234,240,238,.62);margin:0;line-height:1.35;text-align:right;max-width:52%}
+.m-isaret{position:absolute;right:20px;bottom:15px;width:14px;height:14px;
+  border:1px solid rgba(255,255,255,.88);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--sans);font-size:8.5px;font-weight:700;line-height:1;
+  color:#fff;letter-spacing:0;padding-left:.5px}
 .ust h1{font-weight:700;font-size:25px;line-height:1.12;letter-spacing:-.024em;margin:0}
 .ust h1 em{font-style:normal;color:var(--oker)}
 
@@ -105,6 +113,8 @@ select:disabled{opacity:.45}
   letter-spacing:-.03em;padding-top:3px;line-height:1.15}
 .sutunlar .hc:first-child{font-size:12.5px;font-weight:500;padding-top:5px}
 .sutunlar .hc.sonuk{font-weight:400;color:var(--murekkep-2)}
+.sutunlar .hc.kucuk{font-size:12.5px}
+.sutunlar .hc.kucuk2{font-size:10.5px}
 
 /* ---------- Bölge özeti ---------- */
 .ozet{margin:14px 20px 0;padding:13px 16px;border-left:3px solid var(--petrol);
@@ -149,8 +159,12 @@ select:disabled{opacity:.45}
 <div class="kabuk">
 
   <header class="ust">
-    <p class="eyebrow">TKİ Saha Envanteri</p>
+    <div class="ust-satir">
+      <p class="eyebrow">TKİ Saha Envanteri</p>
+      <p class="daire">Etüt Proje ve<br>Arama Dairesi</p>
+    </div>
     <h1>Linyit Sahaları<br><em>Rezerv Bilgileri</em></h1>
+    <span class="m-isaret" aria-hidden="true">M</span>
   </header>
 
   <div class="kumanda">
@@ -189,7 +203,7 @@ select:disabled{opacity:.45}
       <p><strong>Sütunlar:</strong> <code>bolge; il; ad; isletme; kaynak; isletilebilir; kalori</code><br>
       Bölge sütununa <code>GLİ</code>, <code>ELİ</code>, <code>ÇLİ</code> yazın; boş bırakılan ya da
       tanınmayan satırlar <code>Diğer</code> grubuna düşer. İşletme sütununa <code>Yeraltı</code> ya da
-      <code>Açık ocak</code> yazın. Rezervler milyon ton, kalori kcal/kg.</p>
+      <code>Açık ocak</code> yazın. Rezervler <strong>ton</strong> cinsinden, kalori kcal/kg.</p>
     </div>
   </details>
 </div>
@@ -198,21 +212,21 @@ select:disabled{opacity:.45}
 const BOLGELER = ["GLİ","ELİ","ÇLİ","Diğer"];
 
 const ORNEK = [
-  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   kaynak:186.0, isletilebilir:130.2, kalori:2150},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık ocak", kaynak:142.4, isletilebilir:99.7,  kalori:2300},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık ocak", kaynak:64.8,  isletilebilir:45.4,  kalori:2050},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   kaynak:38.2,  isletilebilir:26.7,  kalori:1950},
-  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   kaynak:246.0, isletilebilir:172.2, kalori:2600},
-  {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık ocak", kaynak:118.5, isletilebilir:83.0,  kalori:2450},
-  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık ocak", kaynak:92.0,  isletilebilir:64.4,  kalori:2380},
-  {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   kaynak:74.6,  isletilebilir:52.2,  kalori:2520},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık ocak", kaynak:58.4,  isletilebilir:40.9,  kalori:3100},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık ocak", kaynak:41.2,  isletilebilir:28.8,  kalori:2950},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık ocak", kaynak:33.0,  isletilebilir:23.1,  kalori:3050},
-  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık ocak", kaynak:157.3, isletilebilir:110.1, kalori:1450},
-  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   kaynak:52.6,  isletilebilir:36.8,  kalori:2050},
-  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık ocak", kaynak:88.2,  isletilebilir:61.7,  kalori:1650},
-  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   kaynak:64.0,  isletilebilir:44.8,  kalori:1800}
+  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   kaynak:9640000,  isletilebilir:6748000, kalori:2150},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık ocak", kaynak:4280000,  isletilebilir:2996000, kalori:2300},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık ocak", kaynak:860000,   isletilebilir:602000,  kalori:2050},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   kaynak:515000,   isletilebilir:360500,  kalori:1950},
+  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   kaynak:14200000, isletilebilir:9940000, kalori:2600},
+  {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık ocak", kaynak:3150000,  isletilebilir:2205000, kalori:2450},
+  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık ocak", kaynak:940000,   isletilebilir:658000,  kalori:2380},
+  {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   kaynak:720000,   isletilebilir:504000,  kalori:2520},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık ocak", kaynak:1480000,  isletilebilir:1036000, kalori:3100},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık ocak", kaynak:610000,   isletilebilir:427000,  kalori:2950},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık ocak", kaynak:505000,   isletilebilir:353500,  kalori:3050},
+  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık ocak", kaynak:2760000,  isletilebilir:1932000, kalori:1450},
+  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   kaynak:640000,   isletilebilir:448000,  kalori:2050},
+  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık ocak", kaynak:830000,   isletilebilir:581000,  kalori:1650},
+  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   kaynak:495000,   isletilebilir:346500,  kalori:1800}
 ];
 
 const ANAHTAR = "tki-saha-verisi";
@@ -362,8 +376,7 @@ function veriyiSil(){
 function sablonIndir(){
   const bas = "bolge;il;ad;isletme;kaynak;isletilebilir;kalori";
   const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "",
-    s.kaynak.toString().replace(".",","),
-    s.isletilebilir.toString().replace(".",","), s.kalori].join(";")).join("\n");
+    Math.round(s.kaynak), Math.round(s.isletilebilir), s.kalori].join(";")).join("\n");
   const bag = document.createElement("a");
   bag.href = URL.createObjectURL(new Blob(["\uFEFF"+bas+"\n"+govde], {type:"text/csv;charset=utf-8"}));
   bag.download = "tki-saha-kunyesi-sablon.csv";
@@ -374,6 +387,8 @@ function sablonIndir(){
 const $ = s => document.querySelector(s);
 const sayi = (n,o=1) => n.toLocaleString("tr-TR",{minimumFractionDigits:o,maximumFractionDigits:o});
 const tam  = n => n.toLocaleString("tr-TR",{maximumFractionDigits:0});
+/* uzun rakamlar sütuna sığsın diye punto küçültür */
+const boy = m => m.length > 11 ? " kucuk2" : m.length > 8 ? " kucuk" : "";
 
 /* Seçim listesine girecek sahalar: arama varsa tüm bölgeler, yoksa seçili bölge */
 function adaylar(){
@@ -423,7 +438,7 @@ function ozetKutusu(bolge){
         <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.kaynak,0))}</span>
         <span class="ozet-bolen">/</span>
         <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.isletilebilir,0))}</span>
-        <span class="ozet-birim">milyon ton · Kaynak / İşletilebilir</span>
+        <span class="ozet-birim">ton · Kaynak / İşletilebilir</span>
       </div>
     </section>`;
 }
@@ -467,20 +482,20 @@ function ciz(){
     <article class="saha-kart">
       <h2 class="saha-ad">${s.ad}</h2>
       <div class="saha-yer">${s.il || "—"} · <b>${s.bolge}</b></div>
-      <div class="damar" role="img" aria-label="Kaynak ${sayi(s.kaynak)}, işletilebilir ${sayi(s.isletilebilir)} milyon ton">
+      <div class="damar" role="img" aria-label="Kaynak ${tam(s.kaynak)}, işletilebilir ${tam(s.isletilebilir)} ton">
         <div class="damar-kaynak" style="width:0" data-w="${s.kaynak/enBuyuk*100}"></div>
         <div class="damar-isl" style="width:0" data-w="${s.isletilebilir/enBuyuk*100}"></div>
       </div>
       <div class="damar-not">Ölçek: ${s.bolge} En Büyük Sahası</div>
       <div class="sutunlar">
         <span class="bs">İşletme</span>
-        <span class="bs">Kaynak<small>milyon ton</small></span>
-        <span class="bs">İşletilebilir<small>milyon ton</small></span>
+        <span class="bs">Kaynak<small>ton</small></span>
+        <span class="bs">İşletilebilir<small>ton</small></span>
         <span class="bs">Kalori<small>kcal/kg</small></span>
         <span class="hc">${s.isletme || "—"}</span>
-        <span class="hc">${sayi(s.kaynak)}</span>
-        <span class="hc">${sayi(s.isletilebilir)}</span>
-        <span class="hc sonuk">${s.kalori ? tam(s.kalori) : "—"}</span>
+        <span class="hc${boy(tam(s.kaynak))}">${tam(s.kaynak)}</span>
+        <span class="hc${boy(tam(s.isletilebilir))}">${tam(s.isletilebilir)}</span>
+        <span class="hc sonuk${boy(tam(s.kalori))}">${s.kalori ? tam(s.kalori) : "—"}</span>
       </div>
     </article>` + ozetKutusu(s.bolge);
 
