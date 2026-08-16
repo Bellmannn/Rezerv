@@ -20,6 +20,7 @@
   --oker-koyu:#8F6415; --damar:#2C2521;
   --cizgi:rgba(21,32,29,.13); --cizgi-kuvvetli:rgba(21,32,29,.28);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --baslik:"Bell MT",Baskerville,Charter,Georgia,"Times New Roman","Noto Serif",serif;
   --mono:ui-monospace,"SF Mono","Cascadia Mono","Segoe UI Mono",Menlo,Consolas,"Liberation Mono",monospace;
 }
 *{box-sizing:border-box}
@@ -42,7 +43,8 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
   display:flex;align-items:center;justify-content:center;
   font-family:var(--sans);font-size:8.5px;font-weight:700;line-height:1;
   color:#fff;letter-spacing:0;padding-left:.5px}
-.ust h1{font-weight:700;font-size:25px;line-height:1.12;letter-spacing:-.024em;margin:0}
+.ust h1{font-family:var(--baslik);font-weight:700;font-size:28px;line-height:1.14;
+  letter-spacing:-.004em;margin:0}
 .ust h1 em{font-style:normal;color:var(--oker)}
 
 /* ---------- Bölge + saha seçimi ---------- */
@@ -106,12 +108,15 @@ select:disabled{opacity:.45}
 
 .sutunlar{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px 6px;
   margin-top:14px;padding-top:12px;border-top:1px dashed var(--cizgi-kuvvetli)}
-.sutunlar .bs{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;
-  color:var(--murekkep-2);text-align:center;line-height:1.3}
-.sutunlar .bs small{display:block;font-size:7.5px;opacity:.72;letter-spacing:.04em}
+.sutunlar .bs{font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--murekkep);text-align:center;line-height:1.3}
+.sutunlar .bs small{display:block;font-size:7.5px;font-weight:400;color:var(--murekkep-2);
+  letter-spacing:.04em}
 .sutunlar .hc{font-family:var(--mono);font-size:15px;font-weight:600;text-align:center;
   letter-spacing:-.03em;padding-top:3px;line-height:1.15}
-.sutunlar .hc:first-child{font-size:12.5px;font-weight:500;padding-top:5px}
+.sutunlar .isl-hucre{display:flex;flex-direction:column;align-items:center;gap:4px;padding-top:5px}
+.ih1,.ih2{font-family:var(--mono);font-size:11.5px;font-weight:400;letter-spacing:-.015em;
+  white-space:nowrap;line-height:1.2;text-align:center;color:var(--murekkep)}
 .sutunlar .hc.sonuk{font-weight:400;color:var(--murekkep-2)}
 .sutunlar .hc.kucuk{font-size:12.5px}
 .sutunlar .hc.kucuk2{font-size:10.5px}
@@ -121,7 +126,24 @@ select:disabled{opacity:.45}
   background:rgba(14,91,84,.06)}
 .ozet-baslik{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--murekkep-2)}
-.ozet-satir{display:flex;align-items:baseline;gap:6px;margin-top:5px}
+.ozet-bas-satir{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ozet-ok{font:inherit;background:none;border:0;cursor:pointer;padding:2px 0 2px 8px;flex:none;
+  display:flex;align-items:center;gap:5px;color:var(--murekkep-2);font-family:var(--mono);
+  font-size:8.5px;letter-spacing:.12em;text-transform:uppercase}
+.ozet-ok .sivri{display:inline-block;font-size:11px;transition:transform .2s;line-height:1}
+.ozet-ok[aria-expanded=true] .sivri{transform:rotate(90deg)}
+.ozet-ok:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+.dagilim{display:flex;height:14px;margin:11px 0 5px;background:var(--kart);
+  border:1px solid rgba(143,100,21,.55);overflow:hidden}
+.dg-isl{background:var(--oker);transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.dg-rod{background:repeating-linear-gradient(135deg,var(--oker) 0 2px,#FFFFFF 2px 5px);
+  transition:width .4s cubic-bezier(.2,.7,.3,1)}
+.dagilim-not{display:flex;justify-content:space-between;gap:10px;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.06em;color:var(--murekkep-2)}
+.ozet-satir{display:flex;align-items:baseline;gap:6px;margin-top:12px;padding-top:11px;
+  border-top:1px solid var(--cizgi)}
+.ozet-alt{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;
+  color:var(--murekkep-2);margin-top:4px}
 .ozet-deger{font-family:var(--mono);font-weight:500;font-size:17px;letter-spacing:-.025em;line-height:1}
 .ozet-bolen{color:var(--murekkep-2);font-size:15px;font-family:var(--mono)}
 .ozet-birim{font-family:var(--mono);font-size:10px;color:var(--murekkep-2);margin-left:2px}
@@ -185,7 +207,7 @@ select:disabled{opacity:.45}
   <details class="veri" id="veri">
     <summary><span class="veri-baslik">Veri Kaynağı</span></summary>
     <div class="veri-ic">
-      <p>Excel'de <strong>Farklı Kaydet → CSV (noktalı virgülle ayrılmış)</strong> deyip çıkan dosyayı buraya yükleyin.</p>
+      <p>Excel'de <strong>Farklı Kaydet → CSV (noktalı virgülle ayrılmış)</strong></p>
 
       <div class="dugmeler">
         <button class="dg" type="button" onclick="document.getElementById('dosya').click()">CSV dosyası yükle</button>
@@ -200,10 +222,8 @@ select:disabled{opacity:.45}
         hafızasında saklanır ve sadece bu uygulama okur.
       </div>
 
-      <p><strong>Sütunlar:</strong> <code>bolge; il; ad; isletme; kaynak; isletilebilir; kalori</code><br>
-      Bölge sütununa <code>GLİ</code>, <code>ELİ</code>, <code>ÇLİ</code> yazın; boş bırakılan ya da
-      tanınmayan satırlar <code>Diğer</code> grubuna düşer. İşletme sütununa <code>Yeraltı</code> ya da
-      <code>Açık ocak</code> yazın. Rezervler <strong>ton</strong> cinsinden, kalori kcal/kg.</p>
+      <p style="font-family:var(--mono);font-size:11px;opacity:.75">Uygulama sürümü: 2026-08-16 · v1</p>
+
     </div>
   </details>
 </div>
@@ -212,26 +232,26 @@ select:disabled{opacity:.45}
 const BOLGELER = ["GLİ","ELİ","ÇLİ","Diğer"];
 
 const ORNEK = [
-  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   kaynak:9640000,  isletilebilir:6748000, kalori:2150},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık ocak", kaynak:4280000,  isletilebilir:2996000, kalori:2300},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık ocak", kaynak:860000,   isletilebilir:602000,  kalori:2050},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   kaynak:515000,   isletilebilir:360500,  kalori:1950},
-  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   kaynak:14200000, isletilebilir:9940000, kalori:2600},
-  {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık ocak", kaynak:3150000,  isletilebilir:2205000, kalori:2450},
-  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık ocak", kaynak:940000,   isletilebilir:658000,  kalori:2380},
-  {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   kaynak:720000,   isletilebilir:504000,  kalori:2520},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık ocak", kaynak:1480000,  isletilebilir:1036000, kalori:3100},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık ocak", kaynak:610000,   isletilebilir:427000,  kalori:2950},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık ocak", kaynak:505000,   isletilebilir:353500,  kalori:3050},
-  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık ocak", kaynak:2760000,  isletilebilir:1932000, kalori:1450},
-  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   kaynak:640000,   isletilebilir:448000,  kalori:2050},
-  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık ocak", kaynak:830000,   isletilebilir:581000,  kalori:1650},
-  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   kaynak:495000,   isletilebilir:346500,  kalori:1800}
+  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   statu:"İşletme",  kaynak:9640000,  isletilebilir:6748000, kalori:2150},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık Ocak", statu:"İşletme",  kaynak:4280000,  isletilebilir:2996000, kalori:2300},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık Ocak", statu:"Rödovans", kaynak:860000,   isletilebilir:602000,  kalori:2050},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   statu:"Rödovans", kaynak:515000,   isletilebilir:360500,  kalori:1950},
+  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   statu:"İşletme",  kaynak:14200000, isletilebilir:9940000, kalori:2600},
+  {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık Ocak", statu:"İşletme",  kaynak:3150000,  isletilebilir:2205000, kalori:2450},
+  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık Ocak", statu:"Rödovans", kaynak:940000,   isletilebilir:658000,  kalori:2380},
+  {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   statu:"İşletme",  kaynak:720000,   isletilebilir:504000,  kalori:2520},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık Ocak", statu:"İşletme",  kaynak:1480000,  isletilebilir:1036000, kalori:3100},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık Ocak", statu:"Rödovans", kaynak:610000,   isletilebilir:427000,  kalori:2950},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:505000,   isletilebilir:353500,  kalori:3050},
+  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık Ocak", statu:"İşletme",  kaynak:2760000,  isletilebilir:1932000, kalori:1450},
+  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   statu:"Rödovans", kaynak:640000,   isletilebilir:448000,  kalori:2050},
+  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:830000,   isletilebilir:581000,  kalori:1650},
+  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   statu:"Rödovans", kaynak:495000,   isletilebilir:346500,  kalori:1800}
 ];
 
 const ANAHTAR = "tki-saha-verisi";
 let SAHALAR = ORNEK, kendiVeri = false, kayitTarihi = "";
-let secili = "GLİ", arama = "", sahaIndeks = null;
+let secili = "GLİ", arama = "", sahaIndeks = null, dagilimAcik = false;
 
 const kasa = {
   oku(){ try{ return localStorage.getItem(ANAHTAR); }catch(e){ return null; } },
@@ -276,6 +296,7 @@ const ESLESME = {
   il:["il","sehir","baglioldugil","baglioldugu"],
   ad:["ad","saha","sahaadi","adi","sahaismi","isim"],
   isletme:["isletme","isletmeturu","isletmesekli","yontem","uretimyontemi","ocak","ocakturu","tur"],
+  statu:["statu","rodovans","rodovansmi","isletmestatusu","calismasekli","mulkiyet","durum"],
   kaynak:["kaynak","kaynakrezerv","toplamrezerv","rezerv","gorunurrezerv"],
   isletilebilir:["isletilebilir","isletilebilirrezerv","uretilebilir","kazanilabilir"],
   kalori:["kalori","aid","altisildeger","kalorifikdeger","kcal","isildeger"]
@@ -310,9 +331,15 @@ function isletmeCoz(ham){
   if(!t) return "";
   const s = sadelestir(t);
   if(s.includes("yeralti") || s === "ya" || s === "ye") return "Yeraltı";
-  if(s.includes("acik") || s === "ao" || s.includes("ocak")) return "Açık ocak";
+  if(s.includes("acik") || s === "ao" || s.includes("ocak")) return "Açık Ocak";
   return t;
 }
+function statuCoz(ham){
+  const s = sadelestir(ham);
+  if(s.includes("rodovans") || s === "r") return "Rödovans";
+  return "İşletme";          /* boş bırakılan satırlar kendi işletmemiz sayılır */
+}
+
 function csvYukle(metin){
   const satirlar = satirlariAyir(metin);
   if(satirlar.length < 2) throw new Error("Dosyada başlık satırı ve en az bir saha satırı olmalı.");
@@ -323,6 +350,7 @@ function csvYukle(metin){
   const yeni = satirlar.slice(1).filter(s => al(s,"ad")).map(s => ({
     bolge: bolgeCoz(al(s,"bolge")), il: al(s,"il"), ad: al(s,"ad"),
     isletme: isletmeCoz(al(s,"isletme")),
+    statu: statuCoz(al(s,"statu")),
     kaynak: sayiyaCevir(al(s,"kaynak")),
     isletilebilir: sayiyaCevir(al(s,"isletilebilir")),
     kalori: Math.round(sayiyaCevir(al(s,"kalori")))
@@ -374,8 +402,8 @@ function veriyiSil(){
   ciz(); bildir("Veri silindi.", true);
 }
 function sablonIndir(){
-  const bas = "bolge;il;ad;isletme;kaynak;isletilebilir;kalori";
-  const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "",
+  const bas = "bolge;il;ad;isletme;statu;kaynak;isletilebilir;kalori";
+  const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "", s.statu || "",
     Math.round(s.kaynak), Math.round(s.isletilebilir), s.kalori].join(";")).join("\n");
   const bag = document.createElement("a");
   bag.href = URL.createObjectURL(new Blob(["\uFEFF"+bas+"\n"+govde], {type:"text/csv;charset=utf-8"}));
@@ -429,17 +457,44 @@ function sahaListesiniDoldur(liste){
     ).join("");
 }
 
+function dagilimAc(btn){
+  dagilimAcik = !dagilimAcik;
+  const kutu = document.getElementById("dagilimKutu");
+  if(kutu) kutu.style.display = dagilimAcik ? "block" : "none";
+  btn.setAttribute("aria-expanded", dagilimAcik ? "true" : "false");
+}
+
 function ozetKutusu(bolge){
   const liste = SAHALAR.filter(x => x.bolge === bolge);
   if(!liste.length) return "";
+  const topla = (dizi,alan) => dizi.reduce((t,x) => t + (x[alan]||0), 0);
+  const rodovans = liste.filter(x => x.statu === "Rödovans");
+  const isletme  = liste.filter(x => x.statu !== "Rödovans");
+  const iK = topla(isletme,"kaynak"), rK = topla(rodovans,"kaynak");
+  const tp = (iK + rK) || 1;
   return `<section class="ozet">
-      <div class="ozet-baslik">${bolge} toplamı · ${liste.length} saha</div>
-      <div class="ozet-satir">
-        <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.kaynak,0))}</span>
-        <span class="ozet-bolen">/</span>
-        <span class="ozet-deger">${tam(liste.reduce((t,x)=>t+x.isletilebilir,0))}</span>
-        <span class="ozet-birim">ton · Kaynak / İşletilebilir</span>
+      <div class="ozet-bas-satir">
+        <span class="ozet-baslik">${bolge} toplamı · ${liste.length} saha</span>
+        <button class="ozet-ok" type="button" aria-expanded="${dagilimAcik}"
+          onclick="dagilimAc(this)">dağılım <span class="sivri" aria-hidden="true">&#10095;</span></button>
       </div>
+      <div id="dagilimKutu" style="display:${dagilimAcik ? "block" : "none"}">
+        <div class="dagilim" role="img" aria-label="İşletme ${tam(iK)} ton, rödovans ${tam(rK)} ton">
+          <div class="dg-isl" style="width:${iK/tp*100}%"></div>
+          <div class="dg-rod" style="width:${rK/tp*100}%"></div>
+        </div>
+        <div class="dagilim-not">
+          <span>İşletme ${tam(iK)}</span>
+          <span>Rödovans ${tam(rK)}</span>
+        </div>
+      </div>
+      <div class="ozet-satir">
+        <span class="ozet-deger">${tam(topla(liste,"kaynak"))}</span>
+        <span class="ozet-bolen">/</span>
+        <span class="ozet-deger">${tam(topla(liste,"isletilebilir"))}</span>
+        <span class="ozet-birim">ton</span>
+      </div>
+      <div class="ozet-alt">Kaynak / İşletilebilir</div>
     </section>`;
 }
 
@@ -492,7 +547,7 @@ function ciz(){
         <span class="bs">Kaynak<small>ton</small></span>
         <span class="bs">İşletilebilir<small>ton</small></span>
         <span class="bs">Kalori<small>kcal/kg</small></span>
-        <span class="hc">${s.isletme || "—"}</span>
+        <span class="hc isl-hucre"><span class="ih1">${s.isletme || "—"}</span><span class="ih2">${s.statu || "İşletme"}</span></span>
         <span class="hc${boy(tam(s.kaynak))}">${tam(s.kaynak)}</span>
         <span class="hc${boy(tam(s.isletilebilir))}">${tam(s.isletilebilir)}</span>
         <span class="hc sonuk${boy(tam(s.kalori))}">${s.kalori ? tam(s.kalori) : "—"}</span>
@@ -525,7 +580,17 @@ kayitliVeriyiAl();
 ciz();
 
 if("serviceWorker" in navigator){
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(()=>{}));
+  const oncedenVardi = !!navigator.serviceWorker.controller;
+  let yenilendi = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    /* Yeni sürüm devraldı: sayfayı bir kez tazele */
+    if(oncedenVardi && !yenilendi){ yenilendi = true; location.reload(); }
+  });
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js")
+      .then(kayit => { kayit.update(); })
+      .catch(()=>{});
+  });
 }
 </script>
 </body>
