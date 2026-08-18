@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0B4640">
+<meta name="theme-color" content="#5E1526">
 <title>Linyit Sahaları Rezerv Bilgileri</title>
 
 <link rel="manifest" href="manifest.json">
@@ -16,7 +16,7 @@
 <style>
 :root{
   --kagit:#E7EAE3; --kart:#FAFBF7; --murekkep:#15201D; --murekkep-2:#54615A;
-  --petrol:#0E5B54; --petrol-koyu:#0B4640; --oker:#C08A2E; --oker-sonuk:#E6D6B4;
+  --petrol:#0E5B54; --petrol-koyu:#0B4640; --bordo:#5E1526; --oker:#C08A2E; --oker-sonuk:#E6D6B4;
   --oker-koyu:#8F6415; --damar:#2C2521;
   --cizgi:rgba(21,32,29,.13); --cizgi-kuvvetli:rgba(21,32,29,.28);
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -30,14 +30,14 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
 .kabuk{max-width:560px;margin:0 auto}
 
 /* ---------- Başlık ---------- */
-.ust{position:relative;background:var(--petrol-koyu);color:#EAF0EE;padding:22px 20px 22px;
+.ust{position:relative;background:var(--bordo);color:#F2E7E9;padding:22px 20px 22px;
   padding-top:calc(22px + env(safe-area-inset-top));
   background-image:repeating-linear-gradient(180deg,rgba(255,255,255,.055) 0 1px,transparent 1px 7px)}
 .ust-satir{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:7px}
 .ust .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;
-  color:rgba(234,240,238,.62);margin:0;line-height:1.35}
+  color:rgba(242,231,233,.66);margin:0;line-height:1.35}
 .ust .daire{font-family:var(--mono);font-size:10px;letter-spacing:.17em;text-transform:uppercase;
-  color:rgba(234,240,238,.62);margin:0;line-height:1.35;text-align:right;max-width:52%}
+  color:rgba(242,231,233,.66);margin:0;line-height:1.35;text-align:right;max-width:52%}
 .m-isaret{position:absolute;right:20px;bottom:15px;width:14px;height:14px;
   border:1px solid rgba(255,255,255,.88);border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -54,11 +54,29 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
   border:1px solid rgba(143,100,21,.4);background:var(--oker-sonuk);color:#4A3A15;
   display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1;
   transition:background .15s,box-shadow .15s,color .15s}
+.bolge.genis{grid-column:1/-1;flex-direction:row;justify-content:center;gap:8px;padding:9px 6px}
+.bolge.dar b{font-size:10.5px;line-height:1.16;white-space:normal;text-align:center;
+  letter-spacing:-.015em}
 .bolge b{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .bolge span{font-family:var(--mono);font-size:9px;letter-spacing:.04em;opacity:.72}
 .bolge[aria-pressed=true]{background:var(--oker);border-color:var(--oker-koyu);color:#2A1E06;
   box-shadow:inset 0 -3px 0 rgba(42,30,6,.34)}
 .bolge:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+
+.statuler{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;
+  margin-top:13px;padding-top:12px;border-top:1px solid var(--cizgi-kuvvetli)}
+.statu-dg{font:inherit;cursor:pointer;padding:9px 6px;border-radius:3px;
+  border:1px solid rgba(14,91,84,.30);background:rgba(14,91,84,.06);color:var(--murekkep);
+  display:flex;align-items:center;justify-content:center;gap:7px;line-height:1;
+  transition:background .15s,border-color .15s,color .15s}
+.statu-dg b{font-size:12.5px;font-weight:600;letter-spacing:-.012em}
+.statu-dg span{font-family:var(--mono);font-size:9px;opacity:.62}
+.statu-dg i{width:13px;height:9px;flex:none;border:1px solid rgba(143,100,21,.6)}
+.i-dolu{background:var(--oker)}
+.i-tarali{background:repeating-linear-gradient(135deg,var(--oker) 0 2px,#FFFFFF 2px 5px)}
+.statu-dg[aria-pressed=true]{background:var(--petrol);border-color:var(--petrol);color:#EAF0EE}
+.statu-dg[aria-pressed=true] span{color:rgba(234,240,238,.72);opacity:1}
+.statu-dg:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
 
 .alan{margin-top:12px}
 .alan label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
@@ -122,8 +140,8 @@ select:disabled{opacity:.45}
 .sutunlar .hc.kucuk2{font-size:10.5px}
 
 /* ---------- Bölge özeti ---------- */
-.ozet{margin:14px 20px 0;padding:13px 16px;border-left:3px solid var(--petrol);
-  background:rgba(14,91,84,.06)}
+.ozet{margin:14px 20px 0;padding:13px 15px;border:1px solid rgba(14,91,84,.30);
+  border-radius:3px;background:rgba(14,91,84,.06)}
 .ozet-baslik{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--murekkep-2)}
 .ozet-bas-satir{display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -148,6 +166,47 @@ select:disabled{opacity:.45}
 .ozet-bolen{color:var(--murekkep-2);font-size:15px;font-family:var(--mono)}
 .ozet-birim{font-family:var(--mono);font-size:10px;color:var(--murekkep-2);margin-left:2px}
 
+/* ---------- Harita ---------- */
+.harita-blok{margin-top:14px;padding-top:12px;border-top:1px dashed var(--cizgi-kuvvetli)}
+.harita{position:relative;height:250px;overflow:hidden;border:1px solid var(--cizgi-kuvvetli);
+  border-radius:2px;background:var(--kagit);touch-action:none;cursor:grab;
+  background-image:linear-gradient(rgba(21,32,29,.05) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(21,32,29,.05) 1px,transparent 1px);background-size:22px 22px}
+.harita:active{cursor:grabbing}
+.karolar{position:absolute;inset:0}
+.karolar img{position:absolute;width:256px;height:256px;user-select:none;-webkit-user-drag:none}
+.cizim{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.harita-dugme{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px}
+.harita-dugme button{width:29px;height:29px;border:1px solid var(--cizgi-kuvvetli);
+  background:rgba(250,251,247,.94);color:var(--murekkep);border-radius:2px;cursor:pointer;
+  font-family:var(--mono);font-size:14px;line-height:1;display:flex;align-items:center;
+  justify-content:center;padding:0}
+.harita-dugme button:focus-visible{outline:2px solid var(--petrol);outline-offset:1px}
+.olcek{position:absolute;left:8px;bottom:8px;font-family:var(--mono);font-size:9px;
+  color:var(--murekkep);background:rgba(250,251,247,.86);padding:2px 5px;border-radius:2px}
+.olcek i{display:block;height:4px;border:1px solid var(--murekkep);border-top:0;margin-bottom:2px}
+.atif{position:absolute;right:0;bottom:0;font-family:var(--mono);font-size:7.5px;
+  color:var(--murekkep-2);background:rgba(250,251,247,.86);padding:2px 5px;letter-spacing:.02em}
+.harita-bilgi{display:flex;justify-content:space-between;gap:10px;margin-top:7px;
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--murekkep-2)}
+.harita-bilgi b{color:var(--murekkep);font-weight:600}
+.pano-not{margin-top:5px;font-family:var(--mono);font-size:9px;letter-spacing:.05em;
+  color:var(--murekkep-2);line-height:1.4}
+.earth-blok{margin-top:13px;background:#F4E6E7;border:1px solid rgba(140,80,85,.26);
+  border-radius:3px;padding:11px 13px}
+.earth-bas{display:flex;width:100%;justify-content:space-between;align-items:center;gap:10px;
+  font:inherit;background:none;border:0;cursor:pointer;padding:0;color:#7A4A4A;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.earth-bas .sivri{display:inline-block;font-size:11px;transition:transform .2s;line-height:1}
+.earth-bas[aria-expanded=true] .sivri{transform:rotate(90deg)}
+.earth-bas:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
+.earth-not{margin:10px 0 0;font-size:11.5px;line-height:1.5;color:#6F4B4B}
+.dg.kucuk{font-size:10.5px;padding:7px 10px}
+.dugmeler.tek{margin-top:7px}
+a.dg{text-decoration:none;display:inline-flex;align-items:center}
+.harita-yok{margin-top:14px;padding-top:12px;border-top:1px dashed var(--cizgi-kuvvetli);
+  font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--murekkep-2)}
+
 .bos{margin:16px 20px 0;padding:34px 20px;text-align:center;color:var(--murekkep-2);
   font-family:var(--mono);font-size:12.5px;line-height:1.7;
   border:1px dashed var(--cizgi-kuvvetli);border-radius:3px}
@@ -167,7 +226,7 @@ select:disabled{opacity:.45}
   border:1px solid var(--petrol);background:var(--petrol);color:#EAF0EE;cursor:pointer}
 .dg.ikincil{background:transparent;color:var(--petrol)}
 .dg.sessiz{background:transparent;color:var(--murekkep-2);border-color:var(--cizgi-kuvvetli)}
-#dosya{display:none}
+#dosya,#sinirDosya{display:none}
 .gizlilik{margin-top:14px;padding:11px 12px;border-left:3px solid var(--petrol);
   background:rgba(14,91,84,.06);font-size:12.5px;line-height:1.5;color:var(--murekkep-2)}
 .sonuc{margin-top:12px;font-family:var(--mono);font-size:12px;line-height:1.5}
@@ -191,6 +250,7 @@ select:disabled{opacity:.45}
 
   <div class="kumanda">
     <nav class="bolgeler" id="bolgeler" aria-label="Bölge seçimi"></nav>
+    <nav class="statuler" id="statuler" aria-label="İşletme veya rödovans seçimi"></nav>
     <div class="alan">
       <label for="saha">Saha</label>
       <select id="saha"></select>
@@ -215,6 +275,13 @@ select:disabled{opacity:.45}
         <button class="dg sessiz" type="button" onclick="veriyiSil()">Veriyi sil</button>
       </div>
       <input type="file" id="dosya" accept=".csv,text/csv,text/plain">
+
+      <p style="margin-top:16px">Ruhsat Sınırları — Tek Dosyada Birleştirilmiş <strong>KMZ</strong> ya da <strong>KML</strong></p>
+      <div class="dugmeler">
+        <button class="dg" type="button" onclick="document.getElementById('sinirDosya').click()">KMZ - KML yükle</button>
+        <button class="dg sessiz" type="button" onclick="sinirlariSil()">Sınırları sil</button>
+      </div>
+      <input type="file" id="sinirDosya" accept=".kml,.kmz,application/vnd.google-earth.kml+xml,application/vnd.google-earth.kmz">
       <p class="sonuc" id="sonuc"></p>
 
       <div class="gizlilik">
@@ -222,36 +289,40 @@ select:disabled{opacity:.45}
         hafızasında saklanır ve sadece bu uygulama okur.
       </div>
 
-      <p style="font-family:var(--mono);font-size:11px;opacity:.75">Uygulama sürümü: 2026-08-16 · v1</p>
+      <p style="font-family:var(--mono);font-size:11px;opacity:.75">Uygulama sürümü: 2026-08-18 · v2</p>
 
     </div>
   </details>
 </div>
 
 <script>
-const BOLGELER = ["GLİ","ELİ","ÇLİ","Diğer"];
+const BOLGELER = ["GLİ","ELİ","ÇLİ","Ruhsat Devri Yapılan","Genel Müdürlük"];
 
 const ORNEK = [
-  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   statu:"İşletme",  kaynak:9640000,  isletilebilir:6748000, kalori:2150},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   statu:"İşletme",  kaynak:9640000,  isletilebilir:6748000, kalori:2150,
+   koordinat:[[39.5620,29.4880],[39.5615,29.5240],[39.5390,29.5265],[39.5375,29.4905]]},
   {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık Ocak", statu:"İşletme",  kaynak:4280000,  isletilebilir:2996000, kalori:2300},
   {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık Ocak", statu:"Rödovans", kaynak:860000,   isletilebilir:602000,  kalori:2050},
   {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   statu:"Rödovans", kaynak:515000,   isletilebilir:360500,  kalori:1950},
-  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   statu:"İşletme",  kaynak:14200000, isletilebilir:9940000, kalori:2600},
+  {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   statu:"İşletme",  kaynak:14200000, isletilebilir:9940000, kalori:2600,
+   koordinat:[[39.1450,27.5180],[39.1445,27.5720],[39.1140,27.5745],[39.1130,27.5195]]},
   {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık Ocak", statu:"İşletme",  kaynak:3150000,  isletilebilir:2205000, kalori:2450},
   {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık Ocak", statu:"Rödovans", kaynak:940000,   isletilebilir:658000,  kalori:2380},
   {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   statu:"İşletme",  kaynak:720000,   isletilebilir:504000,  kalori:2520},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık Ocak", statu:"İşletme",  kaynak:1480000,  isletilebilir:1036000, kalori:3100},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık Ocak", statu:"İşletme",  kaynak:1480000,  isletilebilir:1036000, kalori:3100,
+   koordinat:[[40.0405,27.0350],[40.0400,27.0640],[40.0215,27.0655],[40.0210,27.0365]]},
   {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık Ocak", statu:"Rödovans", kaynak:610000,   isletilebilir:427000,  kalori:2950},
   {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:505000,   isletilebilir:353500,  kalori:3050},
-  {bolge:"Diğer", il:"Konya",   ad:"Ilgın",      isletme:"Açık Ocak", statu:"İşletme",  kaynak:2760000,  isletilebilir:1932000, kalori:1450},
-  {bolge:"Diğer", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   statu:"Rödovans", kaynak:640000,   isletilebilir:448000,  kalori:2050},
-  {bolge:"Diğer", il:"Muş",     ad:"Muş Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:830000,   isletilebilir:581000,  kalori:1650},
-  {bolge:"Diğer", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   statu:"Rödovans", kaynak:495000,   isletilebilir:346500,  kalori:1800}
+  {bolge:"Genel Müdürlük", il:"Konya",   ad:"Ilgın",      isletme:"Açık Ocak", statu:"İşletme",  kaynak:2760000,  isletilebilir:1932000, kalori:1450},
+  {bolge:"Genel Müdürlük", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   statu:"Rödovans", kaynak:640000,   isletilebilir:448000,  kalori:2050},
+  {bolge:"Genel Müdürlük", il:"Muş",     ad:"Muş Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:830000,   isletilebilir:581000,  kalori:1650},
+  {bolge:"Genel Müdürlük", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   statu:"Rödovans", kaynak:495000,   isletilebilir:346500,  kalori:1800},
+  {bolge:"Ruhsat Devri Yapılan", il:"Kütahya", ad:"Örnek Devir Sahası", isletme:"Açık Ocak", statu:"İşletme", kaynak:410000, isletilebilir:287000, kalori:2100}
 ];
 
 const ANAHTAR = "tki-saha-verisi";
 let SAHALAR = ORNEK, kendiVeri = false, kayitTarihi = "";
-let secili = "GLİ", arama = "", sahaIndeks = null, dagilimAcik = false;
+let secili = "GLİ", arama = "", sahaIndeks = null, dagilimAcik = false, statuSecili = null, earthAcik = false;
 
 const kasa = {
   oku(){ try{ return localStorage.getItem(ANAHTAR); }catch(e){ return null; } },
@@ -263,7 +334,8 @@ function kayitliVeriyiAl(){
   try{
     const p = JSON.parse(ham);
     if(Array.isArray(p.sahalar) && p.sahalar.length){
-      SAHALAR = p.sahalar; kendiVeri = true; kayitTarihi = p.tarih || "";
+      SAHALAR = p.sahalar.map(x => x.bolge === "Diğer" ? {...x, bolge:"Genel Müdürlük"} : x);
+      kendiVeri = true; kayitTarihi = p.tarih || "";
     }
   }catch(e){}
 }
@@ -297,6 +369,8 @@ const ESLESME = {
   ad:["ad","saha","sahaadi","adi","sahaismi","isim"],
   isletme:["isletme","isletmeturu","isletmesekli","yontem","uretimyontemi","ocak","ocakturu","tur"],
   statu:["statu","rodovans","rodovansmi","isletmestatusu","calismasekli","mulkiyet","durum"],
+  ruhsat:["ruhsat","ruhsatno","sicil","sicilno","ruhsatsicil","ruhsatsicilno","erisim"],
+  koordinat:["koordinat","koordinatlar","sinir","poligon","kose","kosekoordinatlari"],
   kaynak:["kaynak","kaynakrezerv","toplamrezerv","rezerv","gorunurrezerv"],
   isletilebilir:["isletilebilir","isletilebilirrezerv","uretilebilir","kazanilabilir"],
   kalori:["kalori","aid","altisildeger","kalorifikdeger","kcal","isildeger"]
@@ -321,10 +395,11 @@ function sayiyaCevir(ham){
 }
 function bolgeCoz(ham){
   const s = sadelestir(ham);
+  if(s.includes("devr") || s.includes("devir")) return "Ruhsat Devri Yapılan";
   if(s.startsWith("gli") || s.includes("garp")) return "GLİ";
   if(s.startsWith("eli") || s.includes("ege"))  return "ELİ";
   if(s.startsWith("cli") || s.includes("can"))  return "ÇLİ";
-  return "Diğer";
+  return "Genel Müdürlük";
 }
 function isletmeCoz(ham){
   const t = (ham || "").toString().trim();
@@ -334,6 +409,16 @@ function isletmeCoz(ham){
   if(s.includes("acik") || s === "ao" || s.includes("ocak")) return "Açık Ocak";
   return t;
 }
+/* CSV'deki "enlem,boylam enlem,boylam ..." biçimini poligona çevirir */
+function koordinatCoz(ham){
+  if(!ham) return null;
+  const nk = ham.trim().split(/[|;\s]+/).map(p => {
+    const [a,b] = p.split(",").map(Number);
+    return [a,b];
+  }).filter(p => isFinite(p[0]) && isFinite(p[1]) && Math.abs(p[0])<=90 && Math.abs(p[1])<=180);
+  return nk.length >= 3 ? nk : null;
+}
+
 function statuCoz(ham){
   const s = sadelestir(ham);
   if(s.includes("rodovans") || s === "r") return "Rödovans";
@@ -351,6 +436,8 @@ function csvYukle(metin){
     bolge: bolgeCoz(al(s,"bolge")), il: al(s,"il"), ad: al(s,"ad"),
     isletme: isletmeCoz(al(s,"isletme")),
     statu: statuCoz(al(s,"statu")),
+    ruhsat: al(s,"ruhsat"),
+    koordinat: koordinatCoz(al(s,"koordinat")),
     kaynak: sayiyaCevir(al(s,"kaynak")),
     isletilebilir: sayiyaCevir(al(s,"isletilebilir")),
     kalori: Math.round(sayiyaCevir(al(s,"kalori")))
@@ -402,9 +489,9 @@ function veriyiSil(){
   ciz(); bildir("Veri silindi.", true);
 }
 function sablonIndir(){
-  const bas = "bolge;il;ad;isletme;statu;kaynak;isletilebilir;kalori";
+  const bas = "bolge;il;ad;isletme;statu;ruhsat;kaynak;isletilebilir;kalori";
   const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "", s.statu || "",
-    Math.round(s.kaynak), Math.round(s.isletilebilir), s.kalori].join(";")).join("\n");
+    s.ruhsat || "", Math.round(s.kaynak), Math.round(s.isletilebilir), s.kalori].join(";")).join("\n");
   const bag = document.createElement("a");
   bag.href = URL.createObjectURL(new Blob(["\uFEFF"+bas+"\n"+govde], {type:"text/csv;charset=utf-8"}));
   bag.download = "tki-saha-kunyesi-sablon.csv";
@@ -413,29 +500,495 @@ function sablonIndir(){
 
 /* ---------- Arayüz ---------- */
 const $ = s => document.querySelector(s);
+/* ==================================================================
+   SINIR VERİSİ (KML / KMZ) ve HARİTA
+   ================================================================== */
+const SINIR_ANAHTAR = "tki-saha-sinirlari";
+let SINIRLAR = [];
+
+function sinirlariAl(){
+  try{
+    const h = localStorage.getItem(SINIR_ANAHTAR);
+    if(h){ const p = JSON.parse(h); if(Array.isArray(p)) SINIRLAR = p; }
+  }catch(e){}
+}
+function sinirlariYaz(){
+  try{ localStorage.setItem(SINIR_ANAHTAR, JSON.stringify(SINIRLAR)); return true; }
+  catch(e){ return false; }
+}
+
+/* ---- KMZ arşivinden .kml çıkar ---- */
+async function kmzdenKml(tampon){
+  const g = new DataView(tampon), u8 = new Uint8Array(tampon);
+  let eocd = -1;
+  for(let i = u8.length - 22; i >= 0 && i > u8.length - 65558; i--)
+    if(g.getUint32(i, true) === 0x06054b50){ eocd = i; break; }
+  if(eocd < 0) throw new Error("KMZ okunamadı — arşiv sonu bulunamadı.");
+  const adet = g.getUint16(eocd + 10, true);
+  let ofs = g.getUint32(eocd + 16, true);
+  for(let n = 0; n < adet; n++){
+    if(g.getUint32(ofs, true) !== 0x02014b50) throw new Error("KMZ dizini bozuk.");
+    const yontem = g.getUint16(ofs + 10, true), boyut = g.getUint32(ofs + 20, true);
+    const adUz = g.getUint16(ofs + 28, true), ekUz = g.getUint16(ofs + 30, true);
+    const yorumUz = g.getUint16(ofs + 32, true), yerel = g.getUint32(ofs + 42, true);
+    const ad = new TextDecoder().decode(u8.subarray(ofs + 46, ofs + 46 + adUz));
+    if(ad.toLowerCase().endsWith(".kml")){
+      const bas = yerel + 30 + g.getUint16(yerel + 26, true) + g.getUint16(yerel + 28, true);
+      const veri = u8.subarray(bas, bas + boyut);
+      if(yontem === 0) return new TextDecoder("utf-8").decode(veri);
+      if(yontem === 8){
+        if(typeof DecompressionStream === "undefined")
+          throw new Error("Bu tarayıcı KMZ açamıyor; dosyayı KML olarak kaydedip deneyin.");
+        const akis = new Blob([veri]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+        return new TextDecoder("utf-8").decode(new Uint8Array(await new Response(akis).arrayBuffer()));
+      }
+      throw new Error("KMZ sıkıştırma biçimi desteklenmiyor.");
+    }
+    ofs += 46 + adUz + ekUz + yorumUz;
+  }
+  throw new Error("KMZ içinde .kml dosyası bulunamadı.");
+}
+
+/* ---- KML'den poligonları çıkar ---- */
+function kmlPoligonlari(metin){
+  const belge = new DOMParser().parseFromString(metin, "text/xml");
+  if(belge.querySelector("parsererror")) throw new Error("KML dosyası okunamadı.");
+  const cikti = [];
+  belge.querySelectorAll("Placemark").forEach(yer => {
+    const adEl = yer.querySelector("name");
+    const ad = adEl ? adEl.textContent.trim() : "";
+    const ek = [...yer.querySelectorAll("Data value, SimpleData")].map(e => e.textContent.trim());
+    yer.querySelectorAll("Polygon outerBoundaryIs coordinates, Polygon coordinates")
+      .forEach(k => {
+        const nk = k.textContent.trim().split(/\s+/).map(p => {
+          const s = p.split(",");
+          return [parseFloat(s[1]), parseFloat(s[0])];
+        }).filter(p => isFinite(p[0]) && isFinite(p[1]));
+        if(nk.length >= 3) cikti.push({ad, ek, nk});
+      });
+  });
+  if(!cikti.length) throw new Error("Dosyada poligon bulunamadı.");
+  return cikti;
+}
+
+/* ---- Sahayı sınırla eşleştir ---- */
+/* sadelestir() rakamları atar; sicil eşleştirmesi için rakamları koruyan ayrı anahtar gerekir */
+const rakamlar = t => String(t == null ? "" : t).replace(/\D/g, "");
+
+/* Dönüş: {secili, kardesler:[{ad,nk}], sicil} — aynı sicilde birden çok pano olabilir */
+function sahaninSinirlari(s){
+  if(s.koordinat) return {secili:s.koordinat, kardesler:[], sicil:""};
+  if(!SINIRLAR.length) return null;
+
+  const sicil = rakamlar(s.ruhsat), ad = sadelestir(s.ad);
+  let grup = [];
+  if(sicil.length >= 4)
+    grup = SINIRLAR.filter(p => rakamlar(p.ad).includes(sicil)
+                             || (p.ek || []).some(e => rakamlar(e) === sicil));
+
+  if(!grup.length){
+    const v = SINIRLAR.find(p => sadelestir(p.ad) === ad)
+           || SINIRLAR.find(p => { const a = sadelestir(p.ad);
+                                   return a && (a.includes(ad) || ad.includes(a)); });
+    return v ? {secili:v.nk, kardesler:[], sicil} : null;
+  }
+
+  let esles = grup.find(p => sadelestir(p.ad) === ad)
+           || grup.find(p => { const a = sadelestir(p.ad);
+                               return a && (a.includes(ad) || ad.includes(a)); });
+  if(!esles && grup.length === 1) esles = grup[0];
+
+  return {
+    secili: esles ? esles.nk : null,
+    kardesler: grup.filter(p => p !== esles).map(p => ({ad:p.ad, nk:p.nk})),
+    sicil
+  };
+}
+
+/* Varlık kontrolü gereken yerler için kısayol */
+function sahaninSiniri(s){
+  const r = sahaninSinirlari(s);
+  return r ? (r.secili || (r.kardesler[0] && r.kardesler[0].nk) || null) : null;
+}
+
+/* ---- Geometri ---- */
+function alanHektar(nk){
+  const R = 6371008.8, d = Math.PI/180;
+  const lat0 = nk.reduce((t,p) => t+p[0], 0)/nk.length;
+  const xy = nk.map(([la,lo]) => [R*lo*d*Math.cos(lat0*d), R*la*d]);
+  let a = 0;
+  for(let i=0, j=xy.length-1; i<xy.length; j=i++)
+    a += (xy[j][0]+xy[i][0]) * (xy[j][1]-xy[i][1]);
+  return Math.abs(a/2)/10000;
+}
+function sinirKutusu(nk){
+  return nk.reduce((k,p) => ({
+    g: Math.min(k.g,p[0]), k: Math.max(k.k,p[0]),
+    b: Math.min(k.b,p[1]), d: Math.max(k.d,p[1])
+  }), {g:90, k:-90, b:180, d:-180});
+}
+
+/* ---- Slippy harita ---- */
+const KARO = 256, ENBUYUKZ = 17, ENKUCUKZ = 5;
+let hrt = null;
+
+const dunyaX = (lon,z) => (lon+180)/360 * Math.pow(2,z)*KARO;
+const dunyaY = (lat,z) => {
+  const s = Math.sin(lat*Math.PI/180);
+  return (0.5 - Math.log((1+s)/(1-s))/(4*Math.PI)) * Math.pow(2,z)*KARO;
+};
+const tersLon = (x,z) => x/(Math.pow(2,z)*KARO)*360 - 180;
+const tersLat = (y,z) => {
+  const k = Math.PI - 2*Math.PI*y/(Math.pow(2,z)*KARO);
+  return 180/Math.PI * Math.atan(0.5*(Math.exp(k)-Math.exp(-k)));
+};
+
+function haritaKur(secili, kardesler){
+  const kap = document.getElementById("harita");
+  if(!kap) return;
+  const hepsi = (secili ? [secili] : []).concat((kardesler||[]).map(k => k.nk));
+  if(!hepsi.length) return;
+  hrt = {kap, secili, kardesler:(kardesler||[]).map(k => k.nk), tumu:[].concat(...hepsi), z:13};
+  haritaSigdir();
+  haritaOlaylar();
+}
+
+function haritaSigdir(){
+  if(!hrt) return;
+  const kutu = sinirKutusu(hrt.tumu);
+  const g = hrt.kap.clientWidth - 40, y = hrt.kap.clientHeight - 40;
+  let z = ENBUYUKZ;
+  while(z > ENKUCUKZ){
+    const en = Math.abs(dunyaX(kutu.d,z) - dunyaX(kutu.b,z));
+    const boy = Math.abs(dunyaY(kutu.g,z) - dunyaY(kutu.k,z));
+    if(en <= g && boy <= y) break;
+    z--;
+  }
+  hrt.z = z;
+  hrt.merkez = [(kutu.g+kutu.k)/2, (kutu.b+kutu.d)/2];
+  haritaCiz();
+}
+
+function haritaZoom(yon){
+  if(!hrt) return;
+  hrt.z = Math.max(ENKUCUKZ, Math.min(ENBUYUKZ, hrt.z + yon));
+  haritaCiz();
+}
+
+function haritaCiz(){
+  if(!hrt) return;
+  const {kap, z} = hrt;
+  const g = kap.clientWidth, y = kap.clientHeight;
+  if(!g || !y) return;
+  const cx = dunyaX(hrt.merkez[1], z), cy = dunyaY(hrt.merkez[0], z);
+  const ox = cx - g/2, oy = cy - y/2;
+  const enBuyukKaro = Math.pow(2,z);
+
+  let html = "";
+  const x0 = Math.floor(ox/KARO), x1 = Math.floor((ox+g)/KARO);
+  const y0 = Math.floor(oy/KARO), y1 = Math.floor((oy+y)/KARO);
+  const alt = ["a","b","c"];
+  for(let ty = y0; ty <= y1; ty++){
+    if(ty < 0 || ty >= enBuyukKaro) continue;
+    for(let tx = x0; tx <= x1; tx++){
+      const sx = ((tx % enBuyukKaro) + enBuyukKaro) % enBuyukKaro;
+      const url = `https://${alt[(sx+ty)%3]}.tile.opentopomap.org/${z}/${sx}/${ty}.png`;
+      html += `<img src="${url}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"
+        style="left:${tx*KARO-ox}px;top:${ty*KARO-oy}px">`;
+    }
+  }
+  document.getElementById("karolar").innerHTML = html;
+
+  const nokta = nk => nk.map(([la,lo]) =>
+    `${(dunyaX(lo,z)-ox).toFixed(1)},${(dunyaY(la,z)-oy).toFixed(1)}`).join(" ");
+  let svg = `<defs><pattern id="taraGri" width="7" height="7" patternUnits="userSpaceOnUse"
+      patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="rgba(84,97,90,.10)"/>
+      <line x1="0" y1="0" x2="0" y2="7" stroke="rgba(84,97,90,.52)" stroke-width="1.5"/>
+    </pattern></defs>`;
+  /* aynı ruhsattaki diğer panolar: soluk gri taralı, altta */
+  hrt.kardesler.forEach(k => {
+    svg += `<polygon points="${nokta(k)}" fill="url(#taraGri)" stroke="#FFFFFF"
+              stroke-width="3.5" stroke-linejoin="round"/>
+            <polygon points="${nokta(k)}" fill="url(#taraGri)" stroke="#6E7A73" stroke-width="1.5"
+              stroke-linejoin="round"/>`;
+  });
+  /* seçili saha: dolu, koyu, üstte */
+  if(hrt.secili){
+    svg += `<polygon points="${nokta(hrt.secili)}" fill="rgba(192,138,46,.30)" stroke="#FFFFFF"
+              stroke-width="5" stroke-linejoin="round"/>
+            <polygon points="${nokta(hrt.secili)}" fill="none" stroke="#2C2521" stroke-width="2.4"
+              stroke-linejoin="round"/>`;
+  }
+  document.getElementById("cizim").innerHTML = svg;
+
+  /* ölçek çubuğu */
+  const mpp = 156543.03392 * Math.cos(hrt.merkez[0]*Math.PI/180) / Math.pow(2,z);
+  const adaylar = [100,200,500,1000,2000,5000,10000,20000];
+  let m = adaylar.find(a => a/mpp > 45) || 20000;
+  const ol = document.getElementById("olcek");
+  if(ol){
+    ol.querySelector("i").style.width = (m/mpp).toFixed(0) + "px";
+    ol.querySelector("span").textContent = m >= 1000 ? (m/1000) + " km" : m + " m";
+  }
+}
+
+function haritaOlaylar(){
+  const kap = hrt.kap;
+  let suruk = null, ikiParmak = null;
+
+  kap.addEventListener("pointerdown", e => {
+    if(e.target.closest(".harita-dugme")) return;   /* düğmelere dokunma */
+    if(e.pointerType === "touch" && e.isPrimary === false) return;
+    suruk = {x:e.clientX, y:e.clientY};
+    kap.setPointerCapture(e.pointerId);
+  });
+  kap.addEventListener("pointermove", e => {
+    if(!suruk || !hrt) return;
+    const dx = e.clientX - suruk.x, dy = e.clientY - suruk.y;
+    suruk = {x:e.clientX, y:e.clientY};
+    const z = hrt.z;
+    const cx = dunyaX(hrt.merkez[1], z) - dx, cy = dunyaY(hrt.merkez[0], z) - dy;
+    hrt.merkez = [tersLat(cy,z), tersLon(cx,z)];
+    haritaCiz();
+  });
+  const bitir = () => { suruk = null; };
+  kap.addEventListener("pointerup", bitir);
+  kap.addEventListener("pointercancel", bitir);
+  kap.addEventListener("pointerleave", bitir);
+
+  kap.addEventListener("wheel", e => { e.preventDefault(); haritaZoom(e.deltaY < 0 ? 1 : -1); },
+    {passive:false});
+
+  kap.addEventListener("touchstart", e => {
+    if(e.touches.length === 2){
+      const [a,b2] = e.touches;
+      ikiParmak = Math.hypot(a.clientX-b2.clientX, a.clientY-b2.clientY);
+    }
+  }, {passive:true});
+  kap.addEventListener("touchmove", e => {
+    if(e.touches.length === 2 && ikiParmak){
+      const [a,b2] = e.touches;
+      const d = Math.hypot(a.clientX-b2.clientX, a.clientY-b2.clientY);
+      if(d/ikiParmak > 1.55){ haritaZoom(1); ikiParmak = d; }
+      else if(d/ikiParmak < 0.65){ haritaZoom(-1); ikiParmak = d; }
+    }
+  }, {passive:true});
+  kap.addEventListener("touchend", () => { ikiParmak = null; }, {passive:true});
+}
+
+/* ---- Google Earth: bağlantı ve KMZ üretimi ---- */
+function earthAdresi(nk){
+  const k = sinirKutusu(nk);
+  const lat = (k.g+k.k)/2, lon = (k.b+k.d)/2, m = 111320;
+  const en  = Math.abs(k.d-k.b) * m * Math.cos(lat*Math.PI/180);
+  const boy = Math.abs(k.k-k.g) * m;
+  const mesafe = Math.max(700, Math.min(300000, Math.max(en,boy) * 2.2));
+  return `https://earth.google.com/web/@${lat.toFixed(6)},${lon.toFixed(6)},0a,`
+       + `${Math.round(mesafe)}d,35y,0h,0t,0r`;
+}
+function uyduAdresi(nk){
+  const k = sinirKutusu(nk);
+  return `https://www.google.com/maps/@?api=1&map_action=map`
+       + `&center=${((k.g+k.k)/2).toFixed(6)},${((k.b+k.d)/2).toFixed(6)}`
+       + `&zoom=15&basemap=satellite`;
+}
+
+function crc32(u8){
+  if(!crc32.t){
+    const t = new Uint32Array(256);
+    for(let n=0; n<256; n++){
+      let c = n;
+      for(let k=0; k<8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+      t[n] = c >>> 0;
+    }
+    crc32.t = t;
+  }
+  let crc = 0xFFFFFFFF;
+  for(let i=0; i<u8.length; i++) crc = (crc >>> 8) ^ crc32.t[(crc ^ u8[i]) & 0xFF];
+  return (crc ^ 0xFFFFFFFF) >>> 0;
+}
+
+function kmzBaytlari(kmlMetin){
+  const kod = new TextEncoder().encode(kmlMetin);
+  const ad  = new TextEncoder().encode("doc.kml");
+  const crc = crc32(kod);
+  const arb = new ArrayBuffer(30 + ad.length + kod.length + 46 + ad.length + 22);
+  const dv = new DataView(arb), u8 = new Uint8Array(arb);
+  let o = 0;
+  const u16 = v => { dv.setUint16(o, v, true); o += 2; };
+  const u32 = v => { dv.setUint32(o, v, true); o += 4; };
+  u32(0x04034b50); u16(20); u16(0); u16(0); u16(0); u16(0x21);
+  u32(crc); u32(kod.length); u32(kod.length); u16(ad.length); u16(0);
+  u8.set(ad, o); o += ad.length;
+  u8.set(kod, o); o += kod.length;
+  const merkez = o;
+  u32(0x02014b50); u16(20); u16(20); u16(0); u16(0); u16(0); u16(0x21);
+  u32(crc); u32(kod.length); u32(kod.length);
+  u16(ad.length); u16(0); u16(0); u16(0); u16(0); u32(0); u32(0);
+  u8.set(ad, o); o += ad.length;
+  u32(0x06054b50); u16(0); u16(0); u16(1); u16(1);
+  u32(46 + ad.length); u32(merkez); u16(0);
+  return u8;
+}
+
+function kmlUret(kayitlar, baslik){
+  const kac = t => String(t == null ? "" : t)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const yerler = kayitlar.map(y => {
+    const halka = y.nk.concat([y.nk[0]])
+      .map(p => `${p[1].toFixed(6)},${p[0].toFixed(6)},0`).join(" ");
+    const govde = (y.satirlar || []).filter(x => x[1])
+      .map(x => `<b>${kac(x[0])}:</b> ${kac(x[1])}`).join("<br>");
+    return `  <Placemark><name>${kac(y.ad)}</name>
+    <description><![CDATA[${govde.replace(/\]\]>/g,"")}]]></description>
+    <styleUrl>#${y.vurgu ? "secili" : "kardes"}</styleUrl>
+    <Polygon><tessellate>1</tessellate><outerBoundaryIs><LinearRing>
+      <coordinates>${halka}</coordinates>
+    </LinearRing></outerBoundaryIs></Polygon></Placemark>`;
+  }).join("\n");
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"><Document>
+  <name>${kac(baslik)}</name>
+  <Style id="secili">
+    <LineStyle><color>ff21252c</color><width>3</width></LineStyle>
+    <PolyStyle><color>7a2e8ac0</color></PolyStyle>
+  </Style>
+  <Style id="kardes">
+    <LineStyle><color>ff5a6155</color><width>1.6</width></LineStyle>
+    <PolyStyle><color>1e5a6155</color></PolyStyle>
+  </Style>
+${yerler}
+</Document></kml>`;
+}
+
+function sahaSatirlari(s, nk){
+  return [
+    ["Bölge", s.bolge], ["İl", s.il], ["İşletme", s.isletme], ["Statü", s.statu],
+    ["Ruhsat sicil", s.ruhsat], ["Kaynak rezerv", tam(s.kaynak) + " ton"],
+    ["İşletilebilir rezerv", tam(s.isletilebilir) + " ton"],
+    ["Kalori", s.kalori ? tam(s.kalori) + " kcal/kg" : ""],
+    ["Hesaplanan alan", sayi(alanHektar(nk)) + " ha"]
+  ];
+}
+
+function dosyaAdi(t){
+  return sadelestir(t).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "ruhsat";
+}
+
+function kmzIndir(tumu){
+  const kayitlar = [];
+  if(tumu){
+    SAHALAR.forEach(s => {
+      const r = sahaninSinirlari(s);
+      if(r && r.secili)
+        kayitlar.push({ad:s.ad, nk:r.secili, vurgu:true, satirlar:sahaSatirlari(s, r.secili)});
+    });
+  }else if(sahaIndeks !== null){
+    const s = SAHALAR[sahaIndeks], r = sahaninSinirlari(s);
+    if(r && r.secili)
+      kayitlar.push({ad:s.ad, nk:r.secili, vurgu:true, satirlar:sahaSatirlari(s, r.secili)});
+    if(r) r.kardesler.forEach(k => kayitlar.push({
+      ad: k.ad || "Aynı ruhsattaki diğer pano", nk: k.nk, vurgu:false,
+      satirlar: [["Ruhsat sicil", s.ruhsat], ["Hesaplanan alan", sayi(alanHektar(k.nk)) + " ha"]]
+    }));
+  }
+  if(!kayitlar.length){ alert("Sınır verisi bulunamadı."); return; }
+  const baslik = tumu ? "TKİ Ruhsat Sınırları" : SAHALAR[sahaIndeks].ad;
+  const blob = new Blob([kmzBaytlari(kmlUret(kayitlar, baslik))],
+    {type:"application/vnd.google-earth.kmz"});
+  const bag = document.createElement("a");
+  bag.href = URL.createObjectURL(blob);
+  bag.download = (tumu ? "tki-ruhsat-sinirlari" : dosyaAdi(baslik)) + ".kmz";
+  document.body.appendChild(bag); bag.click(); bag.remove();
+  setTimeout(() => URL.revokeObjectURL(bag.href), 4000);
+}
+
+function earthAc(btn){
+  earthAcik = !earthAcik;
+  const kutu = document.getElementById("earthKutu");
+  if(kutu) kutu.style.display = earthAcik ? "block" : "none";
+  btn.setAttribute("aria-expanded", earthAcik ? "true" : "false");
+}
+
+/* ---- Sınır dosyası yükleme ---- */
+document.getElementById("sinirDosya").addEventListener("change", async ev => {
+  const dosya = ev.target.files[0]; if(!dosya) return;
+  ev.target.value = "";
+  try{
+    const tampon = await dosya.arrayBuffer();
+    const kmzMi = dosya.name.toLowerCase().endsWith(".kmz")
+      || (new Uint8Array(tampon.slice(0,2))[0] === 0x50 && new Uint8Array(tampon.slice(0,2))[1] === 0x4B);
+    const metin = kmzMi ? await kmzdenKml(tampon) : metniCoz(tampon);
+    const p = kmlPoligonlari(metin);
+    SINIRLAR = p.map(x => ({
+      ad: x.ad, ek: x.ek,
+      nk: x.nk.map(([a,o]) => [ +a.toFixed(6), +o.toFixed(6) ])
+    }));
+    const saklandi = sinirlariYaz();
+    const eslesen = SAHALAR.filter(s => sahaninSiniri(s)).length;
+    ciz();
+    bildir(`${SINIRLAR.length} sınır okundu, ${eslesen} saha ile eşleşti.`
+      + (saklandi ? "" : " Cihaz hafızası yetmedi; uygulamayı kapatınca silinir."),
+      eslesen > 0);
+  }catch(hata){ bildir(hata.message, false); }
+});
+
+function sinirlariSil(){
+  if(!confirm("Yüklenen ruhsat sınırları silinsin mi?")) return;
+  SINIRLAR = [];
+  try{ localStorage.removeItem(SINIR_ANAHTAR); }catch(e){}
+  ciz(); bildir("Sınır verisi silindi.", true);
+}
+
 const sayi = (n,o=1) => n.toLocaleString("tr-TR",{minimumFractionDigits:o,maximumFractionDigits:o});
 const tam  = n => n.toLocaleString("tr-TR",{maximumFractionDigits:0});
 /* uzun rakamlar sütuna sığsın diye punto küçültür */
 const boy = m => m.length > 11 ? " kucuk2" : m.length > 8 ? " kucuk" : "";
 
 /* Seçim listesine girecek sahalar: arama varsa tüm bölgeler, yoksa seçili bölge */
+function statuUyar(s){
+  return !statuSecili || (s.statu || "İşletme") === statuSecili;
+}
 function adaylar(){
   if(arama){
     const q = arama.toLocaleLowerCase("tr");
     return SAHALAR.map((s,i) => ({s,i}))
-      .filter(o => o.s.ad.toLocaleLowerCase("tr").includes(q)
-                || (o.s.il||"").toLocaleLowerCase("tr").includes(q));
+      .filter(o => statuUyar(o.s) && (o.s.ad.toLocaleLowerCase("tr").includes(q)
+                || (o.s.il||"").toLocaleLowerCase("tr").includes(q)));
   }
-  return SAHALAR.map((s,i) => ({s,i})).filter(o => o.s.bolge === secili);
+  return SAHALAR.map((s,i) => ({s,i}))
+    .filter(o => o.s.bolge === secili && statuUyar(o.s));
+}
+/* Statü seçili değilken rödovanslılar adının yanında işaretlenir */
+function sahaEtiketi(s){
+  return s.ad + (!statuSecili && (s.statu === "Rödovans") ? " (Rödovans)" : "");
 }
 
 function butonlariCiz(){
   $("#bolgeler").innerHTML = BOLGELER.map(b => {
     const adet = SAHALAR.filter(s => s.bolge === b).length;
-    return `<button class="bolge" type="button" aria-pressed="${!arama && b===secili}"
-      onclick="bolgeSec('${b}')"><b>${b}</b><span>${adet} saha</span></button>`;
+    const genis = b === "Genel Müdürlük" ? " genis"
+                : b === "Ruhsat Devri Yapılan" ? " dar" : "";
+    return `<button class="bolge${genis}" type="button" aria-pressed="${!arama && b===secili}"
+      onclick="bolgeSec('${b.replace(/'/g,"\\'")}')"><b>${b}</b><span>${adet} saha</span></button>`;
   }).join("");
 }
+function statulariCiz(){
+  const kaynak = arama ? SAHALAR : SAHALAR.filter(x => x.bolge === secili);
+  const say = d => kaynak.filter(x => (x.statu || "İşletme") === d).length;
+  const kutular = {"İşletme":"i-dolu", "Rödovans":"i-tarali"};
+  $("#statuler").innerHTML = Object.keys(kutular).map(d =>
+    `<button class="statu-dg" type="button" aria-pressed="${statuSecili === d}"
+      onclick="statuSec('${d}')"><i class="${kutular[d]}"></i><b>${d}</b>
+      <span>${say(d)}</span></button>`).join("");
+}
+function statuSec(d){
+  statuSecili = (statuSecili === d) ? null : d;
+  sahaIndeks = null;
+  ciz();
+}
+
 function bolgeSec(b){
   if(arama){ arama = ""; $("#ara").value = ""; $("#temizle").classList.remove("gorunur"); }
   secili = b; sahaIndeks = null;
@@ -453,7 +1006,7 @@ function sahaListesiniDoldur(liste){
   if(sahaIndeks !== null && !liste.some(o => o.i === sahaIndeks)) sahaIndeks = null;
   sec.innerHTML = '<option value=""' + (sahaIndeks===null?" selected":"") + '>— Saha Seçin —</option>'
     + sirali.map(o =>
-      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${o.s.ad}${arama?" — "+o.s.bolge:""}</option>`
+      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${sahaEtiketi(o.s)}${arama?" — "+o.s.bolge:""}</option>`
     ).join("");
 }
 
@@ -508,13 +1061,14 @@ function sonuclariCiz(liste){
   const sirali = liste.slice().sort((a,b) => a.s.ad.localeCompare(b.s.ad,"tr"));
   kap.innerHTML = sirali.slice(0,10).map(o =>
     `<button class="sonuc-sat" type="button" aria-current="${o.i===sahaIndeks}"
-      onclick="sahaSec(${o.i})"><strong>${o.s.ad}</strong>
+      onclick="sahaSec(${o.i})"><strong>${sahaEtiketi(o.s)}</strong>
       <em>${o.s.il || "—"} · ${o.s.bolge}</em></button>`).join("")
     + (sirali.length > 10 ? `<p class="sonuc-bos">${sirali.length} sonuçtan ilk 10'u</p>` : "");
 }
 
 function ciz(){
   butonlariCiz();
+  statulariCiz();
   const liste = adaylar();
   sahaListesiniDoldur(liste);
   sonuclariCiz(liste);
@@ -530,6 +1084,15 @@ function ciz(){
   }
 
   const s = SAHALAR[sahaIndeks];
+  const sn = sahaninSinirlari(s);
+  const sinir = sn ? sn.secili : null;
+  const kardesler = sn ? sn.kardesler : [];
+  const tumNokta = (sinir ? [sinir] : []).concat(kardesler.map(k => k.nk));
+  const varMi = tumNokta.length > 0;
+  const merkez = varMi
+    ? (k => [(k.g+k.k)/2, (k.b+k.d)/2])(sinirKutusu([].concat(...tumNokta)))
+    : [0,0];
+  const ruhsatAlani = tumNokta.reduce((t,nk) => t + alanHektar(nk), 0);
   const bolgeSahalari = SAHALAR.filter(x => x.bolge === s.bolge);
   const enBuyuk = Math.max(...bolgeSahalari.map(x => x.kaynak), 1);
 
@@ -552,11 +1115,54 @@ function ciz(){
         <span class="hc${boy(tam(s.isletilebilir))}">${tam(s.isletilebilir)}</span>
         <span class="hc sonuk${boy(tam(s.kalori))}">${s.kalori ? tam(s.kalori) : "—"}</span>
       </div>
+      ${varMi ? `
+      <div class="harita-blok">
+        <div class="harita" id="harita">
+          <div class="karolar" id="karolar"></div>
+          <svg class="cizim" id="cizim"></svg>
+          <div class="harita-dugme">
+            <button type="button" onclick="haritaZoom(1)" aria-label="Yakınlaştır">+</button>
+            <button type="button" onclick="haritaZoom(-1)" aria-label="Uzaklaştır">&minus;</button>
+            <button type="button" onclick="haritaSigdir()" aria-label="Sahaya sığdır">&#9633;</button>
+          </div>
+          <div class="olcek"><i></i><span></span></div>
+          <div class="atif">© OpenStreetMap, SRTM · OpenTopoMap (CC-BY-SA)</div>
+        </div>
+        <div class="harita-bilgi">
+          <span>${sinir ? `Saha alanı <b>${sayi(alanHektar(sinir))} ha</b>` : "Saha poligonu eşleşmedi"}${
+            kardesler.length ? ` · ruhsat toplamı <b>${sayi(ruhsatAlani)} ha</b>` : ""}</span>
+          <span>${merkez[0].toFixed(4)}° K · ${merkez[1].toFixed(4)}° D</span>
+        </div>
+        ${kardesler.length ? `<div class="pano-not">Aynı sicilde ${kardesler.length + (sinir?1:0)} pano —
+          ${sinir ? "seçili saha sarı, diğerleri gri taralı" : "seçili saha ayırt edilemedi, hepsi gri taralı"}</div>` : ""}
+      </div>
+      <div class="earth-blok">
+          <button class="earth-bas" type="button" aria-expanded="${earthAcik}" onclick="earthAc(this)">
+            <span>Google Earth · Uydu Görünümü</span>
+            <span class="sivri" aria-hidden="true">&#10095;</span>
+          </button>
+          <div id="earthKutu" style="display:${earthAcik ? "block" : "none"}">
+            <div class="dugmeler">
+              <a class="dg ikincil" href="${earthAdresi([].concat(...tumNokta))}" target="_blank" rel="noopener">Earth Web'de Aç</a>
+              <a class="dg ikincil" href="${uyduAdresi([].concat(...tumNokta))}" target="_blank" rel="noopener">Haritalar · Uydu</a>
+            </div>
+            <div class="dugmeler">
+              <button class="dg ikincil" type="button" onclick="kmzIndir(false)">Bu Sahanın KMZ'si</button>
+            </div>
+            <div class="dugmeler tek">
+              <button class="dg sessiz kucuk" type="button" onclick="kmzIndir(true)">Tüm Sahaların KMZ'si</button>
+            </div>
+            <p class="earth-not">İlk iki buton sahayı ortalar, sınırı çizmez. Sınırı görmek için
+            KMZ'yi indirip Earth'te <strong>Projeler → Dosyadan içe aktar</strong> ile açın.</p>
+          </div>
+        </div>` : `<div class="harita-yok">Bu saha için sınır verisi yüklenmedi</div>`}
     </article>` + ozetKutusu(s.bolge);
 
   requestAnimationFrame(() => {
     document.querySelectorAll(".damar-kaynak,.damar-isl")
       .forEach(el => el.style.width = el.dataset.w + "%");
+    hrt = null;
+    if(varMi) haritaKur(sinir, kardesler);
   });
 }
 
@@ -577,6 +1183,7 @@ $("#temizle").addEventListener("click", () => {
 });
 
 kayitliVeriyiAl();
+sinirlariAl();
 ciz();
 
 if("serviceWorker" in navigator){
