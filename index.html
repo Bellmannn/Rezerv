@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+<!--
+  ==========================================================================
+  TKİ Saha Envanteri — Linyit Sahaları Rezerv Bilgileri
+
+  Hazırlayan: İ. Mustafa Mantıcı
+  Etüt Proje ve Arama Dairesi
+  Sürüm: 2026-08-18 · v2
+
+  Saha künyesi ve ruhsat sınırları uygulamanın içinde tutulmaz; kullanıcının
+  kendi cihazında saklanır ve sunucuya gönderilmez.
+  ==========================================================================
+-->
 <html lang="tr">
 <head>
 <meta charset="utf-8">
@@ -48,7 +60,9 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
 .ust h1 em{font-style:normal;color:var(--oker)}
 
 /* ---------- Bölge + saha seçimi ---------- */
-.kumanda{padding:13px 20px 14px;border-bottom:1px solid var(--cizgi-kuvvetli)}
+.kumanda{position:relative;padding:13px 20px 14px}
+.kumanda::after{content:"";position:absolute;left:20px;right:20px;bottom:0;height:1px;
+  background:var(--cizgi-kuvvetli)}
 .bolgeler{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .bolge{font:inherit;cursor:pointer;padding:10px 3px 8px;border-radius:3px;
   border:1px solid rgba(143,100,21,.4);background:var(--oker-sonuk);color:#4A3A15;
@@ -290,6 +304,7 @@ a.dg{text-decoration:none;display:inline-flex;align-items:center}
       </div>
 
       <p style="font-family:var(--mono);font-size:11px;opacity:.75">Uygulama sürümü: 2026-08-18 · v2</p>
+      <p style="font-family:var(--mono);font-size:11px;opacity:.75;margin-top:3px">Hazırlayan: İ. Mustafa Mantıcı</p>
 
     </div>
   </details>
