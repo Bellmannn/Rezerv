@@ -83,6 +83,7 @@ body{background:var(--kagit);color:var(--murekkep);font-family:var(--sans);
   border:1px solid rgba(14,91,84,.30);background:rgba(14,91,84,.06);color:var(--murekkep);
   display:flex;align-items:center;justify-content:center;gap:7px;line-height:1;
   transition:background .15s,border-color .15s,color .15s}
+.statu-dg.genis{grid-column:1/-1}
 .statu-dg b{font-size:12.5px;font-weight:600;letter-spacing:-.012em}
 .statu-dg span{font-family:var(--mono);font-size:9px;opacity:.62}
 .statu-dg i{width:13px;height:9px;flex:none;border:1px solid rgba(143,100,21,.6)}
@@ -123,7 +124,12 @@ select:disabled{opacity:.45}
 /* ---------- Seçili saha ---------- */
 .saha-kart{margin:16px 20px 0;background:var(--kart);border:1px solid var(--cizgi-kuvvetli);
   border-radius:3px;padding:16px 16px 14px}
+.saha-bas{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
 .saha-ad{font-size:24px;font-weight:700;letter-spacing:-.028em;line-height:1.1;margin:0}
+.saha-sag{flex:none;max-width:46%;text-align:right;padding-top:3px}
+.ss1{display:block;font-size:12.5px;font-weight:400;letter-spacing:-.01em;line-height:1.25}
+.ss2{display:block;font-family:var(--mono);font-size:10px;font-weight:400;letter-spacing:.02em;
+  line-height:1.35;color:var(--murekkep-2);margin-top:2px}
 .saha-yer{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;
   color:var(--murekkep-2);margin-top:5px}
 .saha-yer b{color:var(--oker-koyu);font-weight:600}
@@ -190,12 +196,17 @@ select:disabled{opacity:.45}
 .karolar{position:absolute;inset:0}
 .karolar img{position:absolute;width:256px;height:256px;user-select:none;-webkit-user-drag:none}
 .cizim{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.harita-dugme{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;gap:4px}
+.harita-dugme{position:absolute;top:8px;right:8px;display:flex;flex-direction:column;
+  align-items:center;gap:4px}
 .harita-dugme button{width:29px;height:29px;border:1px solid var(--cizgi-kuvvetli);
   background:rgba(250,251,247,.94);color:var(--murekkep);border-radius:2px;cursor:pointer;
   font-family:var(--mono);font-size:14px;line-height:1;display:flex;align-items:center;
   justify-content:center;padding:0}
 .harita-dugme button:focus-visible{outline:2px solid var(--petrol);outline-offset:1px}
+.harita-dugme button.etiketli{width:auto;min-width:29px;height:auto;padding:4px 6px 3px;
+  flex-direction:column;gap:2px}
+.harita-dugme button.etiketli small{font-family:var(--mono);font-size:7.5px;letter-spacing:.05em;
+  line-height:1;color:var(--murekkep-2)}
 .olcek{position:absolute;left:8px;bottom:8px;font-family:var(--mono);font-size:9px;
   color:var(--murekkep);background:rgba(250,251,247,.86);padding:2px 5px;border-radius:2px}
 .olcek i{display:block;height:4px;border:1px solid var(--murekkep);border-top:0;margin-bottom:2px}
@@ -215,8 +226,9 @@ select:disabled{opacity:.45}
 .earth-bas[aria-expanded=true] .sivri{transform:rotate(90deg)}
 .earth-bas:focus-visible{outline:2px solid var(--petrol);outline-offset:2px}
 .earth-not{margin:10px 0 0;font-size:11.5px;line-height:1.5;color:#6F4B4B}
-.dg.kucuk{font-size:10.5px;padding:7px 10px}
-.dugmeler.tek{margin-top:7px}
+.dg.kucuk{font-size:9.5px;padding:6px 9px;letter-spacing:.03em}
+.dugmeler.tek{margin-top:15px}
+.dugmeler.tek .dg{width:100%;justify-content:center;text-align:center}
 a.dg{text-decoration:none;display:inline-flex;align-items:center}
 .harita-yok{margin-top:14px;padding-top:12px;border-top:1px dashed var(--cizgi-kuvvetli);
   font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--murekkep-2)}
@@ -236,6 +248,8 @@ a.dg{text-decoration:none;display:inline-flex;align-items:center}
 .veri-ic code{font-family:var(--mono);font-size:12px;background:rgba(21,32,29,.07);
   padding:1px 4px;border-radius:2px}
 .dugmeler{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.dugmeler.izgara{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dugmeler.izgara .dg{width:100%;justify-content:center;text-align:center}
 .dg{font-family:var(--mono);font-size:12px;letter-spacing:.04em;padding:9px 12px;border-radius:3px;
   border:1px solid var(--petrol);background:var(--petrol);color:#EAF0EE;cursor:pointer}
 .dg.ikincil{background:transparent;color:var(--petrol)}
@@ -285,7 +299,6 @@ a.dg{text-decoration:none;display:inline-flex;align-items:center}
 
       <div class="dugmeler">
         <button class="dg" type="button" onclick="document.getElementById('dosya').click()">CSV dosyası yükle</button>
-        <button class="dg ikincil" type="button" onclick="sablonIndir()">Şablonu indir</button>
         <button class="dg sessiz" type="button" onclick="veriyiSil()">Veriyi sil</button>
       </div>
       <input type="file" id="dosya" accept=".csv,text/csv,text/plain">
@@ -317,27 +330,28 @@ const ORNEK = [
   {bolge:"GLİ", il:"Kütahya",   ad:"Ömerler",    isletme:"Yeraltı",   statu:"İşletme",  kaynak:9640000,  isletilebilir:6748000, kalori:2150,
    koordinat:[[39.5620,29.4880],[39.5615,29.5240],[39.5390,29.5265],[39.5375,29.4905]]},
   {bolge:"GLİ", il:"Kütahya",   ad:"Tunçbilek",  isletme:"Açık Ocak", statu:"İşletme",  kaynak:4280000,  isletilebilir:2996000, kalori:2300},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık Ocak", statu:"Rödovans", kaynak:860000,   isletilebilir:602000,  kalori:2050},
-  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   statu:"Rödovans", kaynak:515000,   isletilebilir:360500,  kalori:1950},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Beke",       isletme:"Açık Ocak", statu:"Rödovans", firma:"Aksu Madencilik A.Ş.", kaynak:860000,   isletilebilir:602000,  kalori:2050},
+  {bolge:"GLİ", il:"Kütahya",   ad:"Domaniç",    isletme:"Yeraltı",   statu:"Rödovans", firma:"Deren Maden Ltd. Şti.", ruhsatturu:"Arama", kaynak:515000,   isletilebilir:360500,  kalori:1950},
   {bolge:"ELİ", il:"Manisa",    ad:"Eynez",      isletme:"Yeraltı",   statu:"İşletme",  kaynak:14200000, isletilebilir:9940000, kalori:2600,
    koordinat:[[39.1450,27.5180],[39.1445,27.5720],[39.1140,27.5745],[39.1130,27.5195]]},
   {bolge:"ELİ", il:"Manisa",    ad:"Işıklar",    isletme:"Açık Ocak", statu:"İşletme",  kaynak:3150000,  isletilebilir:2205000, kalori:2450},
-  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık Ocak", statu:"Rödovans", kaynak:940000,   isletilebilir:658000,  kalori:2380},
+  {bolge:"ELİ", il:"Manisa",    ad:"Deniş",      isletme:"Açık Ocak", statu:"Rödovans", firma:"Ege Kömür San. A.Ş.", kaynak:940000,   isletilebilir:658000,  kalori:2380},
   {bolge:"ELİ", il:"Manisa",    ad:"Kısrakdere", isletme:"Yeraltı",   statu:"İşletme",  kaynak:720000,   isletilebilir:504000,  kalori:2520},
   {bolge:"ÇLİ", il:"Çanakkale", ad:"Durali",     isletme:"Açık Ocak", statu:"İşletme",  kaynak:1480000,  isletilebilir:1036000, kalori:3100,
    koordinat:[[40.0405,27.0350],[40.0400,27.0640],[40.0215,27.0655],[40.0210,27.0365]]},
-  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık Ocak", statu:"Rödovans", kaynak:610000,   isletilebilir:427000,  kalori:2950},
+  {bolge:"ÇLİ", il:"Çanakkale", ad:"Karadağ",    isletme:"Açık Ocak", statu:"Rödovans", firma:"Çan Madencilik A.Ş.", ruhsatturu:"Arama", kaynak:610000,   isletilebilir:427000,  kalori:2950},
   {bolge:"ÇLİ", il:"Çanakkale", ad:"Çan Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:505000,   isletilebilir:353500,  kalori:3050},
   {bolge:"Genel Müdürlük", il:"Konya",   ad:"Ilgın",      isletme:"Açık Ocak", statu:"İşletme",  kaynak:2760000,  isletilebilir:1932000, kalori:1450},
-  {bolge:"Genel Müdürlük", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   statu:"Rödovans", kaynak:640000,   isletilebilir:448000,  kalori:2050},
-  {bolge:"Genel Müdürlük", il:"Muş",     ad:"Muş Merkez", isletme:"Açık Ocak", statu:"İşletme",  kaynak:830000,   isletilebilir:581000,  kalori:1650},
-  {bolge:"Genel Müdürlük", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   statu:"Rödovans", kaynak:495000,   isletilebilir:346500,  kalori:1800},
+  {bolge:"Genel Müdürlük", il:"Çorum",   ad:"Alaca",      isletme:"Yeraltı",   statu:"Rödovans", firma:"Anadolu Linyit Ltd.", kaynak:640000,   isletilebilir:448000,  kalori:2050},
+  {bolge:"Genel Müdürlük", il:"Muş",     ad:"Muş Merkez", isletme:"Açık Ocak", statu:"İşletme",  ruhsatturu:"Arama", kaynak:830000,   isletilebilir:581000,  kalori:1650},
+  {bolge:"Genel Müdürlük", il:"Bingöl",  ad:"Karlıova",   isletme:"Yeraltı",   statu:"Rödovans", firma:"Doğu Maden A.Ş.", ruhsatturu:"Arama", kaynak:495000,   isletilebilir:346500,  kalori:1800},
   {bolge:"Ruhsat Devri Yapılan", il:"Kütahya", ad:"Örnek Devir Sahası", isletme:"Açık Ocak", statu:"İşletme", kaynak:410000, isletilebilir:287000, kalori:2100}
 ];
 
 const ANAHTAR = "tki-saha-verisi";
 let SAHALAR = ORNEK, kendiVeri = false, kayitTarihi = "";
-let secili = "GLİ", arama = "", sahaIndeks = null, dagilimAcik = false, statuSecili = null, earthAcik = false;
+let secili = null, arama = "", sahaIndeks = null, dagilimAcik = false,
+    statuSecili = null, aramaRuhsat = false, earthAcik = false;
 
 const kasa = {
   oku(){ try{ return localStorage.getItem(ANAHTAR); }catch(e){ return null; } },
@@ -385,6 +399,8 @@ const ESLESME = {
   isletme:["isletme","isletmeturu","isletmesekli","yontem","uretimyontemi","ocak","ocakturu","tur"],
   statu:["statu","rodovans","rodovansmi","isletmestatusu","calismasekli","mulkiyet","durum"],
   ruhsat:["ruhsat","ruhsatno","sicil","sicilno","ruhsatsicil","ruhsatsicilno","erisim"],
+  ruhsatturu:["ruhsatturu","ruhsattipi","ruhsatcinsi","ruhsatdurumu","aramaruhsati","ruhsatsinifi"],
+  firma:["firma","sirket","rodovansci","rodovansfirmasi","yuklenici","isletmeci","calisanfirma"],
   koordinat:["koordinat","koordinatlar","sinir","poligon","kose","kosekoordinatlari"],
   kaynak:["kaynak","kaynakrezerv","toplamrezerv","rezerv","gorunurrezerv"],
   isletilebilir:["isletilebilir","isletilebilirrezerv","uretilebilir","kazanilabilir"],
@@ -434,6 +450,10 @@ function koordinatCoz(ham){
   return nk.length >= 3 ? nk : null;
 }
 
+function ruhsatTuruCoz(ham){
+  return sadelestir(ham).includes("arama") ? "Arama" : "İşletme";
+}
+
 function statuCoz(ham){
   const s = sadelestir(ham);
   if(s.includes("rodovans") || s === "r") return "Rödovans";
@@ -452,6 +472,8 @@ function csvYukle(metin){
     isletme: isletmeCoz(al(s,"isletme")),
     statu: statuCoz(al(s,"statu")),
     ruhsat: al(s,"ruhsat"),
+    ruhsatturu: ruhsatTuruCoz(al(s,"ruhsatturu")),
+    firma: al(s,"firma"),
     koordinat: koordinatCoz(al(s,"koordinat")),
     kaynak: sayiyaCevir(al(s,"kaynak")),
     isletilebilir: sayiyaCevir(al(s,"isletilebilir")),
@@ -480,7 +502,7 @@ document.getElementById("dosya").addEventListener("change", ev => {
       const saklandi = kasa.yaz(JSON.stringify({sahalar:yeni, tarih:kayitTarihi}));
       SAHALAR = yeni; kendiVeri = true; arama = ""; sahaIndeks = null;
       $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
-      secili = BOLGELER.find(b => yeni.some(s => s.bolge === b)) || "GLİ";
+      secili = null; statuSecili = null; aramaRuhsat = false;
       ciz();
       bildir(yeni.length + " saha yüklendi." + (saklandi ? " Cihazda saklandı."
         : " Bu tarayıcı kalıcı saklamaya izin vermedi; uygulamayı kapatınca silinir."), true);
@@ -499,18 +521,9 @@ function bildir(mesaj, iyi){
 function veriyiSil(){
   if(!confirm("Cihazdaki saha verisi silinsin mi? Örnek veriye dönülür.")) return;
   kasa.sil(); SAHALAR = ORNEK; kendiVeri = false; kayitTarihi = "";
-  secili = "GLİ"; arama = ""; sahaIndeks = null;
+  secili = null; statuSecili = null; aramaRuhsat = false; arama = ""; sahaIndeks = null;
   $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
   ciz(); bildir("Veri silindi.", true);
-}
-function sablonIndir(){
-  const bas = "bolge;il;ad;isletme;statu;ruhsat;kaynak;isletilebilir;kalori";
-  const govde = SAHALAR.map(s => [s.bolge, s.il, s.ad, s.isletme || "", s.statu || "",
-    s.ruhsat || "", Math.round(s.kaynak), Math.round(s.isletilebilir), s.kalori].join(";")).join("\n");
-  const bag = document.createElement("a");
-  bag.href = URL.createObjectURL(new Blob(["\uFEFF"+bas+"\n"+govde], {type:"text/csv;charset=utf-8"}));
-  bag.download = "tki-saha-kunyesi-sablon.csv";
-  bag.click(); URL.revokeObjectURL(bag.href);
 }
 
 /* ---------- Arayüz ---------- */
@@ -880,7 +893,8 @@ ${yerler}
 function sahaSatirlari(s, nk){
   return [
     ["Bölge", s.bolge], ["İl", s.il], ["İşletme", s.isletme], ["Statü", s.statu],
-    ["Ruhsat sicil", s.ruhsat], ["Kaynak rezerv", tam(s.kaynak) + " ton"],
+    ["Ruhsat sicil", s.ruhsat], ["Ruhsat türü", s.ruhsatturu], ["Çalışan firma", s.firma],
+    ["Kaynak rezerv", tam(s.kaynak) + " ton"],
     ["İşletilebilir rezerv", tam(s.isletilebilir) + " ton"],
     ["Kalori", s.kalori ? tam(s.kalori) + " kcal/kg" : ""],
     ["Hesaplanan alan", sayi(alanHektar(nk)) + " ha"]
@@ -962,18 +976,20 @@ const tam  = n => n.toLocaleString("tr-TR",{maximumFractionDigits:0});
 const boy = m => m.length > 11 ? " kucuk2" : m.length > 8 ? " kucuk" : "";
 
 /* Seçim listesine girecek sahalar: arama varsa tüm bölgeler, yoksa seçili bölge */
-function statuUyar(s){
-  return !statuSecili || (s.statu || "İşletme") === statuSecili;
+function suzgecUyar(s){
+  if(statuSecili && (s.statu || "İşletme") !== statuSecili) return false;
+  if(aramaRuhsat && (s.ruhsatturu || "İşletme") !== "Arama") return false;
+  return true;
 }
 function adaylar(){
+  const temel = SAHALAR.map((s,i) => ({s,i})).filter(o => suzgecUyar(o.s));
   if(arama){
     const q = arama.toLocaleLowerCase("tr");
-    return SAHALAR.map((s,i) => ({s,i}))
-      .filter(o => statuUyar(o.s) && (o.s.ad.toLocaleLowerCase("tr").includes(q)
-                || (o.s.il||"").toLocaleLowerCase("tr").includes(q)));
+    return temel.filter(o => o.s.ad.toLocaleLowerCase("tr").includes(q)
+                          || (o.s.il||"").toLocaleLowerCase("tr").includes(q));
   }
-  return SAHALAR.map((s,i) => ({s,i}))
-    .filter(o => o.s.bolge === secili && statuUyar(o.s));
+  if(secili) return temel.filter(o => o.s.bolge === secili);
+  return temel;                    /* bölge seçilmedi: tüm sahalar listelenir */
 }
 /* Statü seçili değilken rödovanslılar adının yanında işaretlenir */
 function sahaEtiketi(s){
@@ -990,23 +1006,39 @@ function butonlariCiz(){
   }).join("");
 }
 function statulariCiz(){
-  const kaynak = arama ? SAHALAR : SAHALAR.filter(x => x.bolge === secili);
-  const say = d => kaynak.filter(x => (x.statu || "İşletme") === d).length;
-  const kutular = {"İşletme":"i-dolu", "Rödovans":"i-tarali"};
-  $("#statuler").innerHTML = Object.keys(kutular).map(d =>
-    `<button class="statu-dg" type="button" aria-pressed="${statuSecili === d}"
-      onclick="statuSec('${d}')"><i class="${kutular[d]}"></i><b>${d}</b>
-      <span>${say(d)}</span></button>`).join("");
+  const kaynak = (arama || !secili) ? SAHALAR : SAHALAR.filter(x => x.bolge === secili);
+  const say = f => kaynak.filter(f).length;
+  $("#statuler").innerHTML = [
+    `<button class="statu-dg" type="button" aria-pressed="${statuSecili === "İşletme"}"
+       onclick="statuSec('İşletme')"><i class="i-dolu"></i><b>İşletme</b>
+       <span>${say(x => (x.statu || "İşletme") === "İşletme")}</span></button>`,
+    `<button class="statu-dg" type="button" aria-pressed="${statuSecili === "Rödovans"}"
+       onclick="statuSec('Rödovans')"><i class="i-tarali"></i><b>Rödovans</b>
+       <span>${say(x => x.statu === "Rödovans")}</span></button>`,
+    `<button class="statu-dg genis" type="button" aria-pressed="${aramaRuhsat}"
+       onclick="aramaRuhsatSec()"><b>Arama Ruhsatlı</b>
+       <span>${say(x => (x.ruhsatturu || "İşletme") === "Arama")}</span></button>`
+  ].join("");
 }
 function statuSec(d){
   statuSecili = (statuSecili === d) ? null : d;
   sahaIndeks = null;
   ciz();
 }
+function aramaRuhsatSec(){
+  aramaRuhsat = !aramaRuhsat;
+  sahaIndeks = null;
+  ciz();
+}
 
 function bolgeSec(b){
-  if(arama){ arama = ""; $("#ara").value = ""; $("#temizle").classList.remove("gorunur"); }
-  secili = b; sahaIndeks = null;
+  if(arama){
+    arama = ""; $("#ara").value = ""; $("#temizle").classList.remove("gorunur");
+    secili = b;                       /* aramadan çıkarken doğrudan o bölgeye geç */
+  }else{
+    secili = (secili === b) ? null : b;   /* aynı butona basınca seçimi kaldır */
+  }
+  sahaIndeks = null;
   ciz();
 }
 
@@ -1021,7 +1053,8 @@ function sahaListesiniDoldur(liste){
   if(sahaIndeks !== null && !liste.some(o => o.i === sahaIndeks)) sahaIndeks = null;
   sec.innerHTML = '<option value=""' + (sahaIndeks===null?" selected":"") + '>— Saha Seçin —</option>'
     + sirali.map(o =>
-      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${sahaEtiketi(o.s)}${arama?" — "+o.s.bolge:""}</option>`
+      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${sahaEtiketi(o.s)}${
+        (arama || !secili) ? " — " + o.s.bolge : ""}</option>`
     ).join("");
 }
 
@@ -1089,10 +1122,10 @@ function ciz(){
   sonuclariCiz(liste);
 
   if(sahaIndeks === null){
-    const mesaj = !liste.length
-      ? (arama ? "Aramanıza uyan saha bulunamadı."
-               : "Bu bölgede kayıtlı saha yok.<br>CSV'de bölge sütununu kontrol edin.")
-      : "Yukarıdaki menüden bir saha seçin.";
+    const mesaj = liste.length ? "Yukarıdaki menüden bir saha seçin."
+      : arama  ? "Aramanıza uyan saha bulunamadı."
+      : secili ? "Bu bölgede kayıtlı saha yok.<br>CSV'de bölge sütununu kontrol edin."
+               : "Bu seçimde kayıtlı saha yok.";
     $("#govde").innerHTML = '<p class="bos">' + mesaj + '</p>'
       + (arama ? "" : ozetKutusu(secili));
     return;
@@ -1108,13 +1141,26 @@ function ciz(){
     ? (k => [(k.g+k.k)/2, (k.b+k.d)/2])(sinirKutusu([].concat(...tumNokta)))
     : [0,0];
   const ruhsatAlani = tumNokta.reduce((t,nk) => t + alanHektar(nk), 0);
+  /* "İşletme" yazılmaz — rödovans değilse zaten işletmedir */
+  const sagEtiket = [
+    s.statu === "Rödovans" ? "Rödovans" : "",
+    s.ruhsatturu === "Arama" ? "Arama Ruhsatlı" : ""
+  ].filter(Boolean).join(" · ");
   const bolgeSahalari = SAHALAR.filter(x => x.bolge === s.bolge);
   const enBuyuk = Math.max(...bolgeSahalari.map(x => x.kaynak), 1);
 
   $("#govde").innerHTML = `
     <article class="saha-kart">
-      <h2 class="saha-ad">${s.ad}</h2>
-      <div class="saha-yer">${s.il || "—"} · <b>${s.bolge}</b></div>
+      <div class="saha-bas">
+        <div>
+          <h2 class="saha-ad">${s.ad}</h2>
+          <div class="saha-yer">${s.il || "—"} · <b>${s.bolge}</b></div>
+        </div>
+        ${(sagEtiket || s.firma) ? `<div class="saha-sag">
+          ${sagEtiket ? `<span class="ss1">${sagEtiket}</span>` : ""}
+          ${s.firma ? `<span class="ss2">${s.firma}</span>` : ""}
+        </div>` : ""}
+      </div>
       <div class="damar" role="img" aria-label="Kaynak ${tam(s.kaynak)}, işletilebilir ${tam(s.isletilebilir)} ton">
         <div class="damar-kaynak" style="width:0" data-w="${s.kaynak/enBuyuk*100}"></div>
         <div class="damar-isl" style="width:0" data-w="${s.isletilebilir/enBuyuk*100}"></div>
@@ -1125,7 +1171,7 @@ function ciz(){
         <span class="bs">Kaynak<small>ton</small></span>
         <span class="bs">İşletilebilir<small>ton</small></span>
         <span class="bs">Kalori<small>kcal/kg</small></span>
-        <span class="hc isl-hucre"><span class="ih1">${s.isletme || "—"}</span><span class="ih2">${s.statu || "İşletme"}</span></span>
+        <span class="hc isl-hucre"><span class="ih1">${s.isletme || "—"}</span></span>
         <span class="hc${boy(tam(s.kaynak))}">${tam(s.kaynak)}</span>
         <span class="hc${boy(tam(s.isletilebilir))}">${tam(s.isletilebilir)}</span>
         <span class="hc sonuk${boy(tam(s.kalori))}">${s.kalori ? tam(s.kalori) : "—"}</span>
@@ -1138,7 +1184,8 @@ function ciz(){
           <div class="harita-dugme">
             <button type="button" onclick="haritaZoom(1)" aria-label="Yakınlaştır">+</button>
             <button type="button" onclick="haritaZoom(-1)" aria-label="Uzaklaştır">&minus;</button>
-            <button type="button" onclick="haritaSigdir()" aria-label="Sahaya sığdır">&#9633;</button>
+            <button class="etiketli" type="button" onclick="haritaSigdir()"
+              aria-label="Ruhsat limitini çerçevele">&#9633;<small>Limit Bul</small></button>
           </div>
           <div class="olcek"><i></i><span></span></div>
           <div class="atif">© OpenStreetMap, SRTM · OpenTopoMap (CC-BY-SA)</div>
@@ -1157,18 +1204,18 @@ function ciz(){
             <span class="sivri" aria-hidden="true">&#10095;</span>
           </button>
           <div id="earthKutu" style="display:${earthAcik ? "block" : "none"}">
-            <div class="dugmeler">
-              <a class="dg ikincil" href="${earthAdresi([].concat(...tumNokta))}" target="_blank" rel="noopener">Earth Web'de Aç</a>
+            <div class="dugmeler izgara">
+              <a class="dg ikincil" href="${earthAdresi([].concat(...tumNokta))}"
+                target="_blank" rel="noopener">Google Earth</a>
               <a class="dg ikincil" href="${uyduAdresi([].concat(...tumNokta))}" target="_blank" rel="noopener">Haritalar · Uydu</a>
-            </div>
-            <div class="dugmeler">
               <button class="dg ikincil" type="button" onclick="kmzIndir(false)">Bu Sahanın KMZ'si</button>
             </div>
             <div class="dugmeler tek">
               <button class="dg sessiz kucuk" type="button" onclick="kmzIndir(true)">Tüm Sahaların KMZ'si</button>
             </div>
-            <p class="earth-not">İlk iki buton sahayı ortalar, sınırı çizmez. Sınırı görmek için
-            KMZ'yi indirip Earth'te <strong>Projeler → Dosyadan içe aktar</strong> ile açın.</p>
+            <p class="earth-not">Üstteki butonlar sahayı ortalar, sınırı çizmez. Sınırı görmek için
+            KMZ'yi indirip Earth'te <strong>Projeler → Dosyadan içe aktar</strong> ile açın.
+            Google Earth butonu, uygulama kuruluysa doğrudan uygulamayı açar.</p>
           </div>
         </div>` : `<div class="harita-yok">Bu saha için sınır verisi yüklenmedi</div>`}
     </article>` + ozetKutusu(s.bolge);
