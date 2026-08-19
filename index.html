@@ -1053,8 +1053,7 @@ function sahaListesiniDoldur(liste){
   if(sahaIndeks !== null && !liste.some(o => o.i === sahaIndeks)) sahaIndeks = null;
   sec.innerHTML = '<option value=""' + (sahaIndeks===null?" selected":"") + '>— Saha Seçin —</option>'
     + sirali.map(o =>
-      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${sahaEtiketi(o.s)}${
-        (arama || !secili) ? " — " + o.s.bolge : ""}</option>`
+      `<option value="${o.i}"${o.i===sahaIndeks?" selected":""}>${sahaEtiketi(o.s)}</option>`
     ).join("");
 }
 
